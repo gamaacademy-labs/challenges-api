@@ -7,7 +7,7 @@ class UsersModel extends Model<User> {}
 
 UsersModel.init({
     id: {
-        type: DataTypes.UUIDV4,
+        type: DataTypes.STRING(36),
         primaryKey: true,
         allowNull: false,
         defaultValue: uuidv4()

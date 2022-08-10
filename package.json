@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev src/index.ts"
+    "dev": "ts-node-dev src/index.ts",
+    "migration:generate": "npx sequelize migration:generate --name",
+    "seeds:generate": "npx sequelize seed:generate --name",
+    "setup:dev": "npm run build && npx sequelize db:migrate --migrations-path dist/infrastructure/database/migrations && npx sequelize db:seed:all --seeders-path dist/infrastructure/database/seeders",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
