@@ -15,6 +15,6 @@ export default {
   },
 
   async down (queryInterface: QueryInterface, Sequelize: Sequelize) {
-    await UsersModel.destroy()
+    await UsersModel.destroy({ truncate: true })
   }
 };
