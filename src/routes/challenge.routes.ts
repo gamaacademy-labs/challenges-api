@@ -3,6 +3,6 @@ import ChallengeController from "../domain/challenges/challenges.controller";
 
 const challengesRouter = express.Router();
 
-challengesRouter.get("/users/:tittle", ChallengeController.getChallengeByName)
+challengesRouter.get("/challenges/:tittle", ChallengeController.getChallengeByName)
 
 export default challengesRouter;
