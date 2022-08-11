@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import ChallengesService from "./challenges.service";
 
 const ChallengeController = {
-  async getChallengeByName(req: Request, res: Response) {
+  async getChallengeById(req: Request, res: Response) {
     try {
       let id = req.params.id;
 
-      let data = await ChallengesService.getChallengeByName(id);
+      let data = await ChallengesService.getChallengeById(id);
 
       res.status(200);
       res.json(data);

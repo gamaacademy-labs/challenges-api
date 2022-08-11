@@ -6,7 +6,6 @@ export interface Deliverable {
   description: string;
   averageTime: number;
   challengeId: string;
-  challenge?: Challenge;
   createdAt?: string;
   updatedAt?: string;
 }
