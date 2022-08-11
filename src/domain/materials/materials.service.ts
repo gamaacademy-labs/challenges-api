@@ -1,12 +1,14 @@
 import { Material } from "./material.entity";
 import MaterialsModel from "./materials.model";
+import ChallengesModel from "../challenges/challenges.model";
+
 
 const MaterialsService = {
 
     async getMaterialsByChallenge(challengeId: string): Promise<Material[]> {
-        const challengeExists = await MaterialsModel.count({
+        const challengeExists = await ChallengesModel.count({
             where: {
-                challengeId
+                id: challengeId
             }
         });
         
