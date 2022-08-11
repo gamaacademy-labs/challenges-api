@@ -2,8 +2,6 @@ import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from 'uuid';
 import sequelize from "../../infrastructure/database";
 import { Challenge } from "./challenge.entity";
-import MaterialsModel from "../materials/materials.model";
-
 
 class ChallengesModel extends Model<Challenge> {}
 
