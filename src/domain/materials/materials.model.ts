@@ -2,7 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from 'uuid';
 import sequelize from "../../infrastructure/database";
 import { Material } from "./material.entity";
-// import { ChallengesModel } from "../challenges/challenges.model";
+import ChallengesModel from "../challenges/challenges.model";
 
 class MaterialsModel extends Model<Material> {}
 
@@ -29,10 +29,10 @@ MaterialsModel.init({
     challengeId: {
         type: DataTypes.STRING(36),
         allowNull: false,
-        // references: {
-        //     model: ChallengesModel,
-        //     key: 'id'
-        // }
+        references: {
+            model: ChallengesModel,
+            key: "id"
+        }
     }
 }, {
     tableName: "challenge_materials",
@@ -40,9 +40,5 @@ MaterialsModel.init({
     underscored: true,
     sequelize: sequelize
 });
-
-// MaterialsModel.belongsTo(ChallengesModel, {
-//     foreignKey: "challenge_id"
-// });
 
 export default MaterialsModel;
