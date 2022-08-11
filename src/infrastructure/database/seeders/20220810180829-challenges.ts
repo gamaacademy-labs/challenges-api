@@ -13,7 +13,7 @@ export default {
       thumbnail:'Lorem ipsum dolor sit amet',
       level: enum_challenge_difficult.medium,
       instruction:'Lorem ipsum dolor sit amet, consectetur.',
-      tags:["a", "b"],
+      tags: "a, b, c",
       score: "12",
       
     }, {
@@ -23,7 +23,7 @@ export default {
       thumbnail:'Lorem ipsum dolor sit amet',
       level: enum_challenge_difficult.hard ,
       instruction:'Lorem ipsum dolor sit amet, consectetur.',
-      tags: ["a", "b"],
+      tags: "a, b, c",
       score: "12",
       
     },
@@ -34,7 +34,7 @@ export default {
   thumbnail:'Lorem ipsum dolor sit amet',
   level: enum_challenge_difficult.easy,
   instruction:'Lorem ipsum dolor sit amet, consectetur.',
-  tags:["a", "b"],
+  tags: "a, b, c",
   score: "12",
   
     

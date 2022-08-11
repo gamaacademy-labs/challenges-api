@@ -34,7 +34,7 @@ ChallengesModel.init({
         allowNull: false
     },
     tags: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.TEXT,
         allowNull: false
     },
     score: {

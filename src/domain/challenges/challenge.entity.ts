@@ -11,7 +11,7 @@ export interface Challenge {
     thumbnail: string
     level: enum_challenge_difficult
     instruction: string
-    tags: string[]
+    tags: string
     score: string
     createdAt?: string
     updatedAt?: string
