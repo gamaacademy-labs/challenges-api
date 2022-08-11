@@ -8,7 +8,7 @@
     "dev": "ts-node-dev src/index.ts",
     "migration:generate": "npx sequelize migration:generate --name",
     "seeds:generate": "npx sequelize seed:generate --name",
-    "db:reset": "npx sequelize db:seed:undo:all --seeders-path dist/infrastructure/database/seeders  && npx sequelize db:migrate:undo:all --migrations-path dist/infrastructure/database/migrations",
+    "db:reset": "npx sequelize db:migrate:undo:all --migrations-path dist/infrastructure/database/migrations",
     "setup:dev": "npm run build && npm run db:reset &&  npx sequelize db:migrate --migrations-path dist/infrastructure/database/migrations && npx sequelize db:seed:all --seeders-path dist/infrastructure/database/seeders",
     "build": "tsc"
   },

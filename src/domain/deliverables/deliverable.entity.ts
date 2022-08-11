@@ -1,4 +1,4 @@
-// import { Challenges } from "../challenges/challenges.entity.ts";
+import { Challenge } from "../challenges/challenge.entity";
 
 export interface Deliverable {
   id: string;
@@ -6,7 +6,7 @@ export interface Deliverable {
   description: string;
   averageTime: number;
   challengeId: string;
-  // challenge?: Challenges;
+  challenge?: Challenge;
   createdAt?: string;
   updatedAt?: string;
 }

@@ -2,7 +2,6 @@ import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
 import sequelize from "../../infrastructure/database";
 import { Deliverable } from "./deliverable.entity";
-// import { Challenges } from "../challenges/challenges.entity";
 
 class DeliverablesModel extends Model<Deliverable> {}
 
@@ -29,10 +28,6 @@ DeliverablesModel.init(
     challengeId: {
       type: DataTypes.STRING(36),
       allowNull: false
-      // references: {
-      //     model: ChallengesModel,
-      //     key: 'id'
-      // }
     }
   },
   {
@@ -42,9 +37,5 @@ DeliverablesModel.init(
     sequelize: sequelize
   }
 );
-
-// DeliverablesModel.belongsTo(ChallengesModel, {
-//   foreignKey: "id"
-// });
 
 export default DeliverablesModel;
