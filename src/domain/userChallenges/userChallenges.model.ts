@@ -19,6 +19,15 @@ UserChallengesModel.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    startedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    finishedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
     challengeId: {
       type: DataTypes.STRING,
       allowNull: false,
