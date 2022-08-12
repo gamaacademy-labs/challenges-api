@@ -8,4 +8,5 @@ export interface UserChallenge {
   finishedAt?: string;
   challengeId: string;
   userId: string;
+  user?: User;
 }

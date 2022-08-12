@@ -53,4 +53,10 @@ UserChallengesModel.init(
   }
 );
 
+UserChallengesModel.hasOne(UsersModel, {
+  foreignKey: 'id',
+  sourceKey: 'userId',
+  as: 'user'
+})
+
 export default UserChallengesModel;
