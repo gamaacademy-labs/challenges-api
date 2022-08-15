@@ -16,7 +16,7 @@ export default {
           level: enum_challenge_difficult.medium,
           instruction: "Lorem ipsum dolor sit amet, consectetur.",
           tags: "a, b, c",
-          score: "12"
+          score: "12",
         },
         {
           id: "661d66e4-b36a-49a9-b2af-f5464ef59acb",
@@ -26,7 +26,7 @@ export default {
           level: enum_challenge_difficult.hard,
           instruction: "Lorem ipsum dolor sit amet, consectetur.",
           tags: "a, b, c",
-          score: "12"
+          score: "12",
         },
         {
           id: "926ad065-6dd1-4add-ad90-91440b97172d",
@@ -36,8 +36,8 @@ export default {
           level: enum_challenge_difficult.easy,
           instruction: "Lorem ipsum dolor sit amet, consectetur.",
           tags: "a, b, c",
-          score: "12"
-        }
+          score: "12",
+        },
       ],
       {}
     );
@@ -45,5 +45,5 @@ export default {
 
   async down(queryInterface: QueryInterface, Sequelize: Sequelize) {
     await ChallengesModel.destroy({ truncate: true });
-  }
+  },
 };
