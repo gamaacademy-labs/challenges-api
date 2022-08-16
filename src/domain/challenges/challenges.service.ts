@@ -11,10 +11,10 @@ const ChallengesService = {
 
     return challenge.get({ plain: true });
   },
-  async getChallengeAll() {
-    let listarDesafios = await ChallengeModel.findAll({});
-    return listarDesafios;
-    if (!listarDesafios) throw new Error("Nenhum desafio encontrado");
+  async getAllChallenges(): Promise<Challenge[]> {
+    let challengesList = await ChallengeModel.findAll();
+
+    return challengesList as unknown as Challenge[];
   },
 };
 
