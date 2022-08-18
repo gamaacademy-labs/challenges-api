@@ -8,4 +8,9 @@ usersChallengeRouter.get(
   userChallengesController.getScoresByChallenge
 );
 
+usersChallengeRouter.post(
+  "/startchallenge",
+  userChallengesController.startChallenge
+);
+
 export default usersChallengeRouter;
