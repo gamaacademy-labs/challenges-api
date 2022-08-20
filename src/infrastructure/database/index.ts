@@ -1,18 +1,16 @@
 import { Sequelize } from "sequelize";
-import dotenv from "dotenv";
+import { DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER } from "../../config/secrets";
 
-dotenv.config();
-
-const sequelize = new Sequelize({ 
-    dialect: 'mysql',
-    host: process.env.DB_HOST,   
-    username: process.env.DB_USER,   
-    password: process.env.DB_PASS,   
-    database: process.env.DB_NAME,   
-    port: Number(process.env.DB_PORT),  
-    define: {     
-        timestamps: true,   
-    },
+const sequelize = new Sequelize({
+  dialect: 'mysql',
+  host: DB_HOST,
+  username: DB_USER,
+  password: DB_PASS,
+  database: DB_NAME,
+  port: Number(DB_PORT),
+  define: {
+    timestamps: true,
+  },
 })
 
 export default sequelize;
