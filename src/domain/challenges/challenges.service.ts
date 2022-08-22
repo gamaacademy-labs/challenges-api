@@ -14,6 +14,8 @@ const ChallengesService = {
   async getAllChallenges(): Promise<Challenge[]> {
     let challengesList = await ChallengeModel.findAll();
 
+    if (challengesList.length < 1) throw new Error("Não existe nenhum desafio");
+
     return challengesList as unknown as Challenge[];
   },
 };
