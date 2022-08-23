@@ -13,10 +13,23 @@ const ChallengeController = {
     } catch (err: any) {
       res.status(400);
       res.json({
-        message: err.message
+        message: err.message,
       });
     }
-  }
+  },
+  async getAllChallenges(req: Request, res: Response) {
+    try {
+      let data = await ChallengesService.getAllChallenges();
+
+      res.status(200);
+      res.json(data);
+    } catch (err: any) {
+      res.status(400);
+      res.json({
+        message: err.message,
+      });
+    }
+  },
 };
 
 export default ChallengeController;

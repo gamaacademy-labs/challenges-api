@@ -5,4 +5,6 @@ const challengesRouter = express.Router();
 
 challengesRouter.get("/challenges/:id", ChallengeController.getChallengeById);
 
+challengesRouter.get("/challenges", ChallengeController.getAllChallenges);
+
 export default challengesRouter;
