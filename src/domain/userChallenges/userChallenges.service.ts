@@ -1,5 +1,4 @@
-import { stringify } from "querystring";
-import sequelize from "sequelize";
+import { v4 as uuidv4 } from "uuid";
 import ChallengesModel from "../challenges/challenges.model";
 import UsersModel from "../users/users.model";
 import { UserChallenge } from "./userChallenges.entity";
@@ -33,19 +32,21 @@ const UserChallengesService = {
         id: userId
       }
     });
-
     if (!userExists) throw new Error("Usuário não encontrado");
+
     const challengeStarted = await UserChallengesModel.count({
       where: {
         userId,
         challengeId
       }
     });
-
     if (challengeStarted == 1) throw new Error("Desafio já foi iniciado");
+
     const startingChallenge = await UserChallengesModel.create({
+      id: uuidv4(),
       userId,
-      challengeId
+      challengeId,
+      score: ""
     });
     return startingChallenge as unknown as UserChallenge;
   }
