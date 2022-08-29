@@ -11,6 +11,7 @@ const ChallengesService = {
 
     return challenge.get({ plain: true });
   },
+  
   async getAllChallenges(): Promise<Challenge[]> {
     let challengesList = await ChallengeModel.findAll();
 

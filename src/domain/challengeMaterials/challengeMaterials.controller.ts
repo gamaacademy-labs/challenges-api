@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import MaterialsService from "./materials.service";
+import ChallengeMaterialsService from "./challengeMaterials.service";
 
-const MaterialsController = {
+const ChallengeMaterialsController = {
     async getMaterialsByChallenge(req: Request, res: Response) {
         try {
             let challengeId = req.params.challengeId;
 
-            let data = await MaterialsService.getMaterialsByChallenge(challengeId);
+            let data = await ChallengeMaterialsService.getMaterialsByChallenge(challengeId);
 
             res.status(200);
             res.json(data);
@@ -20,4 +20,4 @@ const MaterialsController = {
     }
 }
 
-export default MaterialsController;
+export default ChallengeMaterialsController;

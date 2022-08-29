@@ -1,12 +1,12 @@
 'use strict';
 
 import { QueryInterface, Sequelize } from "sequelize";
-import { enum_material_type } from "../../../domain/materials/material.entity";
-import MaterialsModel from "../../../domain/materials/materials.model";
+import { enum_material_type } from "../../../domain/challengeMaterials/challengeMaterial.entity";
+import ChallengeMaterialsModel from "../../../domain/challengeMaterials/challengeMaterials.model";
 
 export default {
   async up (queryInterface: QueryInterface, Sequelize: Sequelize) {
-    await MaterialsModel.bulkCreate([{
+    await ChallengeMaterialsModel.bulkCreate([{
       id: "7dbd8f91-0271-4f49-81a1-a5d1aba2a829",
       title: "video1",
       link: "www.google.com",
@@ -28,6 +28,6 @@ export default {
   },
 
   async down (queryInterface: QueryInterface, Sequelize: Sequelize) {
-    await MaterialsModel.destroy({ truncate: true })
+    await ChallengeMaterialsModel.destroy({ truncate: true })
   }
 };
