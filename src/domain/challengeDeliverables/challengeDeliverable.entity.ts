@@ -1,6 +1,5 @@
-import { Challenge } from "../challenges/challenge.entity";
 
-export interface Deliverable {
+export interface ChallengeDeliverable {
   id: string;
   title: string;
   description: string;

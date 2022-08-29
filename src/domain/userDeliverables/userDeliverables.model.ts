@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from 'uuid';
 import sequelize from "../../infrastructure/database";
-import DeliverablesModel from "../deliverables/deliverables.model";
+import ChallengeDeliverablesModel from "../challengeDeliverables/challengeDeliverables.model";
 import UserChallengesModel from "../userChallenges/userChallenges.model";
 import { UserDeliverable } from "./userDeliverable.entity";
 
@@ -34,7 +34,7 @@ UserDeliverablesModel.init({
         type: DataTypes.STRING,
         allowNull: false,
         references: {
-          model: DeliverablesModel,
+          model: ChallengeDeliverablesModel,
           key: "id"
         }
     }
@@ -47,13 +47,13 @@ UserDeliverablesModel.init({
 
 UserDeliverablesModel.hasOne(UserChallengesModel, {
     foreignKey: "id",
-    sourceKey: "usersChallengesId",
+    sourceKey: "userChallengeId",
     as: "usersChallenges"
 });
 
-UserDeliverablesModel.hasOne(DeliverablesModel, {
+UserDeliverablesModel.hasOne(ChallengeDeliverablesModel, {
     foreignKey: "id",
-    sourceKey: "challengeDeliverablesId",
+    sourceKey: "challengeDeliverableId",
     as: "challengeDeliverables"
 });
 
