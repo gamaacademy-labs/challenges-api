@@ -2,8 +2,8 @@ export interface UserDeliverable {
     id: string
     link: string
     explanation: string
-    usersChallengesId: string
-    challengeDeliverablesId: string
+    userChallengeId: string
+    challengeDeliverableId: string
     createdAt?: string
     updatedAt?: string
 }

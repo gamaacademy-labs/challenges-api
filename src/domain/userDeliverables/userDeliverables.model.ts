@@ -22,7 +22,7 @@ UserDeliverablesModel.init({
         type: DataTypes.TEXT,
         allowNull: false
     },
-    usersChallengesId: {
+    userChallengeId: {
         type: DataTypes.STRING,
         allowNull: false,
         references: {
@@ -30,7 +30,7 @@ UserDeliverablesModel.init({
           key: "id"
         }
     },
-    challengeDeliverablesId: {
+    challengeDeliverableId: {
         type: DataTypes.STRING,
         allowNull: false,
         references: {
