@@ -2,6 +2,7 @@ import ChallengesModel from "../challenges/challenges.model";
 import UsersModel from "../users/users.model";
 import { UserChallenge } from "./userChallenges.entity";
 import UserChallengesModel from "./userChallenges.model";
+import { UserIdChallengeId_type } from "./userChallenges.types";
 
 const UserChallengesService = {
   async getScoresByChallenge(challengeId: string): Promise<UserChallenge[]> {
@@ -22,10 +23,10 @@ const UserChallengesService = {
     return usersScores as unknown as UserChallenge[];
   },
 
-  async startChallenge(
-    userId: string,
-    challengeId: string
-  ): Promise<UserChallenge> {
+  async startChallenge({
+    userId,
+    challengeId
+  }: UserIdChallengeId_type): Promise<UserChallenge> {
     const userExists = await UsersModel.count({
       where: {
         id: userId
@@ -49,9 +50,9 @@ const UserChallengesService = {
   },
 
   async getUserChallenge({ 
-    challengeId, 
-    userId 
-  }: any): Promise<UserChallenge> {
+    userId,
+    challengeId 
+  }: UserIdChallengeId_type): Promise<UserChallenge> {
     const challengeExists = await ChallengesModel.count({
       where: {
         id: challengeId
