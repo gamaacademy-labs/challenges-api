@@ -15,6 +15,8 @@ export interface Challenge {
   instruction: string;
   tags: string;
   score: string;
+  answers: string;
+  deadline: string; 
   deliverables?: Deliverable[];
   createdAt?: string;
   updatedAt?: string;
