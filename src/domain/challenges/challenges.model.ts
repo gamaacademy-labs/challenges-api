@@ -42,7 +42,15 @@ ChallengesModel.init(
     score: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    answers: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    deadline: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }, 
   },
   {
     tableName: "challenges",
