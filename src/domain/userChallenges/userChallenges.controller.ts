@@ -27,7 +27,22 @@ const ChallengesController = {
       res.status(400);
       res.json({ message: err.message });
     }
-  }
+  },
+
+  async getUserChallenge(req: Request, res: Response) {
+    try {
+      let { challengeId, userId } = req.body;
+      let data = await UserChallengesService.getUserChallenge({
+        challengeId, 
+        userId
+      });
+      res.status(200);
+      res.json(data);
+    } catch (err: any) {
+      res.status(400);
+      res.json({ message: err.message });
+    }
+  },
 };
 
 export default ChallengesController;

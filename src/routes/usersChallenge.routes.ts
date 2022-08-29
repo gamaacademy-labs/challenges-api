@@ -7,7 +7,10 @@ usersChallengeRouter.get(
   "/ranking/:challengeId",
   userChallengesController.getScoresByChallenge
 );
-
+usersChallengeRouter.get(
+  "/userchallenge", 
+  userChallengesController.getUserChallenge
+);
 usersChallengeRouter.post(
   "/startchallenge",
   userChallengesController.startChallenge
