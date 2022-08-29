@@ -17,17 +17,32 @@ const ChallengesController = {
   async startChallenge(req: Request, res: Response) {
     try {
       let { challengeId, userId } = req.body;
-      let data = await UserChallengesService.startChallenge(
+      let data = await UserChallengesService.startChallenge({
         userId,
         challengeId
-      );
+      });
       res.status(201);
       res.json(data);
     } catch (err: any) {
       res.status(400);
       res.json({ message: err.message });
     }
-  }
+  },
+
+  async getUserChallenge(req: Request, res: Response) {
+    try {
+      let { challengeId, userId } = req.body;
+      let data = await UserChallengesService.getUserChallenge({
+        userId,
+        challengeId
+      });
+      res.status(200);
+      res.json(data);
+    } catch (err: any) {
+      res.status(400);
+      res.json({ message: err.message });
+    }
+  },
 };
 
 export default ChallengesController;
