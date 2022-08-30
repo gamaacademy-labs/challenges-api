@@ -19,7 +19,7 @@ const ChallengesController = {
       let { challengeId, userId } = req.body;
       let data = await UserChallengesService.startChallenge({
         userId,
-        challengeId
+        challengeId,
       });
       res.status(201);
       res.json(data);
@@ -34,7 +34,23 @@ const ChallengesController = {
       let { challengeId, userId } = req.body;
       let data = await UserChallengesService.getUserChallenge({
         userId,
-        challengeId
+        challengeId,
+      });
+      res.status(200);
+      res.json(data);
+    } catch (err: any) {
+      res.status(400);
+      res.json({ message: err.message });
+    }
+  },
+  async endChallenge(req: Request, res: Response) {
+    try {
+      let { challengeId, userId } = req.body;
+      let dateFinished = new Date();
+      let data = await UserChallengesService.endChallenge({
+        userId,
+        challengeId,
+        dateFinished,
       });
       res.status(200);
       res.json(data);
