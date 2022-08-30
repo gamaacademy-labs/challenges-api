@@ -5,7 +5,7 @@ export enum enum_material_type {
     link = "link"
 }
 
-export interface Material {
+export interface ChallengeMaterial {
     id: string
     title: string
     link: string

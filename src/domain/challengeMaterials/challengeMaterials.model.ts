@@ -1,12 +1,12 @@
 import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from 'uuid';
 import sequelize from "../../infrastructure/database";
-import { Material } from "./material.entity";
+import { ChallengeMaterial } from "./challengeMaterial.entity";
 import ChallengesModel from "../challenges/challenges.model";
 
-class MaterialsModel extends Model<Material> {}
+class ChallengeMaterialsModel extends Model<ChallengeMaterial> {}
 
-MaterialsModel.init({
+ChallengeMaterialsModel.init({
     id: {
         type: DataTypes.STRING(36),
         primaryKey: true,
@@ -41,4 +41,4 @@ MaterialsModel.init({
     sequelize: sequelize
 });
 
-export default MaterialsModel;
+export default ChallengeMaterialsModel;
