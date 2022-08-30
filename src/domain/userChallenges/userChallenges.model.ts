@@ -13,50 +13,51 @@ UserChallengesModel.init(
       type: DataTypes.STRING(36),
       primaryKey: true,
       allowNull: false,
-      defaultValue: uuidv4()
+      defaultValue: uuidv4(),
     },
     score: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     startedAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW
+      defaultValue: DataTypes.NOW,
     },
     finishedAt: {
       type: DataTypes.DATE,
-      allowNull: true
+      allowNull: true,
+      defaultValue: DataTypes.NOW,
     },
     challengeId: {
       type: DataTypes.STRING,
       allowNull: false,
       references: {
         model: ChallengesModel,
-        key: "id"
-      }
+        key: "id",
+      },
     },
     userId: {
       type: DataTypes.STRING,
       allowNull: false,
       references: {
         model: UsersModel,
-        key: "id"
-      }
-    }
+        key: "id",
+      },
+    },
   },
   {
     tableName: "user_challenges",
     timestamps: true,
     underscored: true,
-    sequelize: sequelize
+    sequelize: sequelize,
   }
 );
 
 UserChallengesModel.hasOne(UsersModel, {
   foreignKey: "id",
   sourceKey: "userId",
-  as: "user"
+  as: "user",
 });
 
 export default UserChallengesModel;
