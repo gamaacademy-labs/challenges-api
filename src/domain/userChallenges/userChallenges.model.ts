@@ -1,9 +1,9 @@
-import { UserChallenge } from "./userChallenges.entity";
 import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
 import sequelize from "../../infrastructure/database";
 import ChallengesModel from "../challenges/challenges.model";
 import UsersModel from "../users/users.model";
+import { UserChallenge } from "./userChallenges.entity";
 
 class UserChallengesModel extends Model<UserChallenge> {}
 
@@ -22,12 +22,10 @@ UserChallengesModel.init(
     startedAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW,
     },
     finishedAt: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: DataTypes.NOW,
     },
     challengeId: {
       type: DataTypes.STRING,

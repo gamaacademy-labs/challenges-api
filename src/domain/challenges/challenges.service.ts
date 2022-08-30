@@ -19,6 +19,11 @@ const ChallengesService = {
 
     return challengesList as unknown as Challenge[];
   },
+
+  async getDeadline(challengeId:string){
+    const deadline: any = await ChallengeModel.findOne({where:{id: challengeId}})
+    return deadline.deadline;
+  }
 };
 
 export default ChallengesService;
