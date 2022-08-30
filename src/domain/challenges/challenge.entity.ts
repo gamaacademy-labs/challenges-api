@@ -1,4 +1,4 @@
-import { Deliverable } from "../deliverables/deliverable.entity";
+import { ChallengeDeliverable } from "../challengeDeliverables/challengeDeliverable.entity";
 
 export enum enum_challenge_difficult {
   easy = "easy",
@@ -7,17 +7,17 @@ export enum enum_challenge_difficult {
 }
 
 export interface Challenge {
-  id: string;
-  title: string;
-  description: string;
-  thumbnail: string;
-  level: enum_challenge_difficult;
-  instruction: string;
-  tags: string;
-  score: string;
-  answers: string;
-  deadline: string; 
-  deliverables?: Deliverable[];
-  createdAt?: string;
-  updatedAt?: string;
+  id: string
+  title: string
+  description: string
+  thumbnail: string
+  level: enum_challenge_difficult
+  instruction: string
+  tags: string
+  score: string
+  answers: string
+  deadline: string
+  deliverables?: ChallengeDeliverable[]
+  createdAt?: string
+  updatedAt?: string
 }

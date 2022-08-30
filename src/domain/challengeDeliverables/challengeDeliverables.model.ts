@@ -1,11 +1,11 @@
 import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
 import sequelize from "../../infrastructure/database";
-import { Deliverable } from "./deliverable.entity";
+import { ChallengeDeliverable } from "./challengeDeliverable.entity";
 
-class DeliverablesModel extends Model<Deliverable> {}
+class ChallengeDeliverablesModel extends Model<ChallengeDeliverable> {}
 
-DeliverablesModel.init(
+ChallengeDeliverablesModel.init(
   {
     id: {
       type: DataTypes.STRING(36),
@@ -38,4 +38,4 @@ DeliverablesModel.init(
   }
 );
 
-export default DeliverablesModel;
+export default ChallengeDeliverablesModel;

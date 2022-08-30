@@ -1,11 +1,12 @@
 "use strict";
 
 import { QueryInterface, Sequelize } from "sequelize";
-import DeliverablesModel from "../../../domain/deliverables/deliverables.model";
+import ChallengeDeliverablesModel from "../../../domain/challengeDeliverables/challengeDeliverables.model";
+
 
 export default {
   async up(queryInterface: QueryInterface, Sequelize: Sequelize) {
-    await DeliverablesModel.bulkCreate(
+    await ChallengeDeliverablesModel.bulkCreate(
       [
         {
           id: "13967613-da69-4c55-9fbd-d3d731bfff9a",
@@ -29,6 +30,6 @@ export default {
   },
 
   async down(queryInterface: QueryInterface, Sequelize: Sequelize) {
-    await DeliverablesModel.destroy({ truncate: true });
+    await ChallengeDeliverablesModel.destroy({ truncate: true });
   }
 };
