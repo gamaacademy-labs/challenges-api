@@ -3,9 +3,10 @@ import ChallengesModel from "../challenges/challenges.model";
 import UsersModel from "../users/users.model";
 import { UserChallenge } from "./userChallenges.entity";
 import UserChallengesModel from "./userChallenges.model";
-import { UserIdChallengeId_type } from "./userChallenges.types";
-import { User } from "../users/user.entity";
-import { where } from "sequelize/types";
+import {
+  DateFinished_type,
+  UserIdChallengeId_type,
+} from "./userChallenges.types";
 
 const UserChallengesService = {
   async getScoresByChallenge(challengeId: string): Promise<UserChallenge[]> {
@@ -81,11 +82,7 @@ const UserChallengesService = {
     return userChallenge as unknown as UserChallenge;
   },
 
-  async endChallenge({
-    challengeId,
-    userId,
-    dateFinished,
-  }: any): Promise<UserChallenge> {
+  async endChallenge({ challengeId, userId, dateFinished }: DateFinished_type) {
     const userChallenge = await UserChallengesModel.findOne({
       where: {
         challengeId,
@@ -103,7 +100,7 @@ const UserChallengesService = {
         },
       }
     );
-    return finishChallenge as unknown as UserChallenge;
+    return finishChallenge;
   },
 };
 

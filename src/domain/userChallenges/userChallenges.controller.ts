@@ -46,7 +46,7 @@ const ChallengesController = {
   async endChallenge(req: Request, res: Response) {
     try {
       let { challengeId, userId } = req.body;
-      let dateFinished = new Date();
+      let dateFinished = new Date().toString();
       let data = await UserChallengesService.endChallenge({
         userId,
         challengeId,
