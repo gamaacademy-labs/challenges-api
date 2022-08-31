@@ -20,17 +20,12 @@ const UserDeliverablesService = {
         const userChallengeId = getUserChallenge.id;
         if (!userChallengeId) throw new Error("Desafio não iniciado pelo usuário");
 
-        console.log("peguei userchallengeid")
-
         const finishAt = await ChallengesService.getFinishAt(challengeId);
         const finishedAfter = isAfter(new Date(), parseJSON(finishAt));
         
         if(finishedAfter == true){
             throw new Error("Data limite para a entrega do desafio ultrapassada")
         }
-
-        console.log("comparou datas")
-
         
         const includeUserDeliverable = await UserDeliverablesModel.create({
             userChallengeId,
