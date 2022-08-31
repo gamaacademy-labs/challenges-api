@@ -16,7 +16,7 @@ export interface Challenge {
   tags: string
   score: string
   answers: string
-  deadline: string
+  finishAt: string
   deliverables?: ChallengeDeliverable[]
   createdAt?: string
   updatedAt?: string

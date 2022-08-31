@@ -18,7 +18,7 @@ export default {
           tags: "a, b, c",
           score: "12",
           answers: "Lorem ipsum dolor sit amet",
-          deadline: "2022-09-01 23:59:59",
+          finishAt: "2020-09-01 23:59:59",
         },
         {
           id: "661d66e4-b36a-49a9-b2af-f5464ef59acb",
@@ -30,7 +30,7 @@ export default {
           tags: "a, b, c",
           score: "12",
           answers: "Lorem ipsum dolor sit amet",
-          deadline: "2022-10-01 23:59:59",
+          finishAt: "2022-10-01 23:59:59",
         },
         {
           id: "926ad065-6dd1-4add-ad90-91440b97172d",
@@ -42,7 +42,7 @@ export default {
           tags: "a, b, c",
           score: "12",
           answers: "Lorem ipsum dolor sit amet",
-          deadline: "2022-11-01 23:59:59",
+          finishAt: "2022-11-01 23:59:59",
         },
       ],
       {}

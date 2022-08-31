@@ -1,4 +1,4 @@
-import { isAfter } from "date-fns";
+import { isAfter, parseJSON } from "date-fns";
 import ChallengesModel from "../challenges/challenges.model";
 import ChallengesService from "../challenges/challenges.service";
 import UsersModel from "../users/users.model";
@@ -29,8 +29,9 @@ const UserChallengesService = {
   },
 
   async getStartedAt(userChallengId:string){
-    const startedAt: any = await UserChallengesModel.findOne({where:{id: userChallengId}})
-    return startedAt.startedAt;
+    const startedAt = await UserChallengesModel.findOne({where:{id: userChallengId}})
+    if (!startedAt) throw new Error("Desafio não iniciado");
+    return startedAt.get({plain: true}).startedAt;
   },
 
   async startChallenge({
@@ -58,12 +59,12 @@ const UserChallengesService = {
       startedAt: new Date().toString(),
     });
 
-    const deadline = await ChallengesService.getDeadline(challengeId)
-    const deadlineHasFinished = isAfter(new Date(), deadline)
+    const finishAt = await ChallengesService.getFinishAt(challengeId)
+    const finishedAfter = isAfter(new Date(), parseJSON(finishAt))
     
-    if(deadlineHasFinished == true){
-      this.endChallenge({ challengeId, userId, dateFinished:deadline })
-      await UserChallengesModel.update({ startedAt: deadline },
+    if(finishedAfter == true){
+      this.endChallenge({ challengeId, userId, dateFinished: finishAt })
+      await UserChallengesModel.update({ startedAt: finishAt },
         {
           where: {
             challengeId,
