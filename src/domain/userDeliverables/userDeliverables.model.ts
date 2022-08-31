@@ -39,7 +39,7 @@ UserDeliverablesModel.init({
         }
     }
 }, {
-    tableName: "users_deliverables",
+    tableName: "user_deliverables",
     timestamps: true,
     underscored: true,
     sequelize: sequelize
