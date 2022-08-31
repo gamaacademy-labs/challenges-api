@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import UserChallengesService from "./userChallenges.service";
 
-const ChallengesController = {
+const UserChallengesController = {
   async getScoresByChallenge(req: Request, res: Response) {
     try {
       let challengeId = req.params.challengeId;
@@ -61,4 +61,4 @@ const ChallengesController = {
   },
 };
 
-export default ChallengesController;
+export default UserChallengesController;
