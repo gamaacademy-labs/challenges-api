@@ -36,6 +36,20 @@ const UserDeliverablesService = {
 
         return includeUserDeliverable as unknown as UserDeliverable;
     },
+
+    async getDeliverableById(userDeliverableId: string): Promise<UserDeliverable> {
+        let userDeliverablesId = await UserDeliverablesModel.findOne({
+            where: {
+                id: userDeliverableId
+            }
+        });
+        if (!userDeliverablesId) throw new Error("Desafio não encontrado");
+
+        return userDeliverablesId.get({ plain: true });
+      
+    }
+
 }
 
 export default UserDeliverablesService;
+
