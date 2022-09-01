@@ -1,5 +1,5 @@
 export interface UserDeliverable {
-    id: string
+    id?: string
     link: string
     explanation: string
     userChallengeId: string
