@@ -1,8 +1,9 @@
 import express from "express";
-import UserDeliverableController from "../domain/userDeliverables/userDeliverable.controller"
+import UserDeliverablesController from "../domain/userDeliverables/userDeliverable.controller"
 
-const userDeliverableRoutes = express.Router();
+const userDeliverablesRouter = express.Router();
 
-userDeliverableRoutes.get("/userdeliverables/:id", UserDeliverableController.getDeliverableById);
+userDeliverablesRouter.post( "/userdeliverable", UserDeliverablesController.includeUserDeliverable);
+userDeliverablesRouter.get("/userdeliverable/:userDeliverableId", UserDeliverablesController.getDeliverableById);
 
-export default userDeliverableRoutes
+export default userDeliverablesRouter

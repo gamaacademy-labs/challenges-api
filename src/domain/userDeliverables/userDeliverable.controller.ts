@@ -2,7 +2,7 @@
 import { Request , Response} from "express";
 import UserDeliverablesService from "./userDeliverables.service"
 
-const UserDeliverableController = {
+const UserDeliverablesController = {
   async includeUserDeliverable(req: Request, res: Response) {
     try {
       let { challengeId, userId, challengeDeliverableId, link, explanation } = req.body;
@@ -23,9 +23,9 @@ const UserDeliverableController = {
 
     async getDeliverableById(req: Request, res: Response) {
       try {
-        let id = req.params.id;
+        let userDeliverableId = req.params.userDeliverableId;
   
-        let data = await UserDeliverablesService.getDeliverableById(id);
+        let data = await UserDeliverablesService.getDeliverableById(userDeliverableId);
   
         res.status(200);
         res.json(data);
@@ -41,4 +41,4 @@ const UserDeliverableController = {
     
 
 
-export default UserDeliverableController
+export default UserDeliverablesController
