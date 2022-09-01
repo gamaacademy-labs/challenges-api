@@ -10,4 +10,4 @@ const UsersService = {
     }
 }
 
-export default UsersService
+export default UsersService;
