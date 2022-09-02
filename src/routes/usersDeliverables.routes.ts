@@ -8,4 +8,14 @@ usersDeliverablesRouter.post(
   UserDeliverablesController.includeUserDeliverable
 );
 
+usersDeliverablesRouter.put(
+  "/userdeliverable/:userDeliverableId",
+  UserDeliverablesController.updateUserDeliverable
+);
+
+usersDeliverablesRouter.get(
+  "/userdeliverable/:userDeliverableId",
+  UserDeliverablesController.getDeliverableById
+);
+
 export default usersDeliverablesRouter;
