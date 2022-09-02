@@ -2,10 +2,12 @@ import { Challenge } from "./challenge.entity";
 import ChallengeModel from "./challenges.model";
 
 const ChallengesService = {
-  async getChallengeById(id: string): Promise<Challenge> {
+  async getChallengeById(challengeId: string): Promise<Challenge> {
     let challenge = await ChallengeModel.findOne({
-      where: { id },
-      include: "deliverables",
+      where: { 
+        id: challengeId 
+      },
+      include: "challenges_deliverables",
     });
     if (!challenge) throw new Error("Desafio não encontrado");
 
