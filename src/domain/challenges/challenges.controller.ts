@@ -4,9 +4,9 @@ import ChallengesService from "./challenges.service";
 const ChallengeController = {
   async getChallengeById(req: Request, res: Response) {
     try {
-      let id = req.params.id;
+      let { challengeId } = req.params;
 
-      let data = await ChallengesService.getChallengeById(id);
+      let data = await ChallengesService.getChallengeById(challengeId);
 
       res.status(200);
       res.json(data);

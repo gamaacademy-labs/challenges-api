@@ -1,21 +1,21 @@
 import express from "express";
 import UserDeliverablesController from "../domain/userDeliverables/userDeliverables.controller";
 
-const usersDeliverablesRouter = express.Router();
+const userDeliverablesRouter = express.Router();
 
-usersDeliverablesRouter.post(
+userDeliverablesRouter.post(
   "/userdeliverable",
   UserDeliverablesController.includeUserDeliverable
 );
 
-usersDeliverablesRouter.put(
+userDeliverablesRouter.put(
   "/userdeliverable/:userDeliverableId",
   UserDeliverablesController.updateUserDeliverable
 );
 
-usersDeliverablesRouter.get(
+userDeliverablesRouter.get(
   "/userdeliverable/:userDeliverableId",
   UserDeliverablesController.getDeliverableById
 );
 
-export default usersDeliverablesRouter;
+export default userDeliverablesRouter;
