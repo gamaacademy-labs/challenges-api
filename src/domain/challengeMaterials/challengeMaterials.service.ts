@@ -1,19 +1,12 @@
 import { ChallengeMaterial } from "./challengeMaterial.entity";
 import ChallengeMaterialsModel from "./challengeMaterials.model";
-import ChallengesModel from "../challenges/challenges.model";
+import ChallengesService from "../challenges/challenges.service";
 
 
 const ChallengeMaterialsService = {
-
     async getMaterialsByChallenge(challengeId: string): Promise<ChallengeMaterial[]> {
-        const challengeExists = await ChallengesModel.count({
-            where: {
-                id: challengeId
-            }
-        });
+        await ChallengesService.challengeExists(challengeId);
         
-        if(!challengeExists) throw new Error("Desafio não encontrado");
-
         const material = await ChallengeMaterialsModel.findAll({ 
             where: { 
                 challengeId

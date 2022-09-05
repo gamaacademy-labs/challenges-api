@@ -1,12 +1,8 @@
+import ChallengesService from "../challenges/challenges.service";
 import UserChallengesService from "../userChallenges/userChallenges.service";
 import { UserDeliverable } from "./userDeliverable.entity";
 import UserDeliverablesModel from "./userDeliverables.model";
-import {
-  createUserDeliverable_type,
-  updateUserDeliverableId_type,
-} from "./userDeliverables.types";
-import { isAfter, parseJSON } from "date-fns";
-import ChallengesService from "../challenges/challenges.service";
+import { createUserDeliverable_type, updateUserDeliverableId_type } from "./userDeliverables.types";
 
 const UserDeliverablesService = {
   async includeUserDeliverable({
@@ -23,12 +19,7 @@ const UserDeliverablesService = {
     const userChallengeId = getUserChallenge.id;
     if (!userChallengeId) throw new Error("Desafio não iniciado pelo usuário");
 
-    const finishAt = await ChallengesService.getFinishAt(challengeId);
-    const finishedAfter = isAfter(new Date(), parseJSON(finishAt));
-
-    if (finishedAfter == true) {
-      throw new Error("Data limite para a entrega do desafio ultrapassada");
-    }
+    await ChallengesService.finishDateVerification(challengeId);
 
     const includeUserDeliverable = await UserDeliverablesModel.create({
       userChallengeId,
@@ -51,18 +42,11 @@ const UserDeliverablesService = {
       userId,
       challengeId,
     });
-
     const userChallengefinished = getUserChallenge.finishedAt;
-    if (userChallengefinished) {
-      throw new Error("Desafio já finalizado");
-    }
+    if (userChallengefinished) throw new Error("Desafio já finalizado");
 
-    const finishAt = await ChallengesService.getFinishAt(challengeId);
-    const finishedAfter = isAfter(new Date(), parseJSON(finishAt));
+    await ChallengesService.finishDateVerification(challengeId);
 
-    if (finishedAfter == true) {
-      throw new Error("Data limite para a entrega do desafio ultrapassada");
-    }
     const updateUserDeliverable = await UserDeliverablesModel.update(
       {
         link,
@@ -76,9 +60,8 @@ const UserDeliverablesService = {
     );
     return updateUserDeliverable;
   },
-  async getDeliverableById(
-    userDeliverableId: string
-  ): Promise<UserDeliverable> {
+
+  async getDeliverableById(userDeliverableId: string): Promise<UserDeliverable> {
     let userDeliverablesId = await UserDeliverablesModel.findOne({
       where: {
         id: userDeliverableId,
