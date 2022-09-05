@@ -7,6 +7,15 @@ const UsersService = {
         if(!user) throw new Error("Usuário não encontrado")
 
         return user.get({ plain: true })
+    },
+
+    async userExists(userId: string) {
+        const userExists = await UsersModel.count({
+            where: {
+              id: userId,
+            },
+          });
+          if (!userExists) throw new Error("Usuário não encontrado");
     }
 }
 
