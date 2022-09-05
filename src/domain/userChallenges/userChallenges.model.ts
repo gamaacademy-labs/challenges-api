@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import sequelize from "../../infrastructure/database";
 import ChallengesModel from "../challenges/challenges.model";
 import UsersModel from "../users/users.model";
-import { UserChallenge } from "./userChallenges.entity";
+import { UserChallenge } from "./userChallenge.entity";
 
 class UserChallengesModel extends Model<UserChallenge> {}
 
