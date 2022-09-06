@@ -32,7 +32,14 @@ const ChallengesService = {
   async getFinishAt(challengeId:string) {
     const finishAt = await this.getChallengeById(challengeId);
     return finishAt.finishAt;
-  }
-};
+  },
+
+  async getStartedAt(challengeId: string) {
+    const startedAt = await this.getChallengeById(challengeId);
+   
+    return startedAt.startedAt;
+  },
+
+ }
 
 export default ChallengesService;
