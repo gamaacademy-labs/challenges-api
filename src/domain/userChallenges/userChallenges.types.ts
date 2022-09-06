@@ -1,6 +1,7 @@
 export interface UserIdChallengeIdType {
   challengeId: string
   userId: string
+  dateStarted?: string
 }
 
 export interface DateFinishedType {
@@ -13,3 +14,5 @@ export interface DateVerificationType {
   challengeId: string
   userId: string
 }
+
+

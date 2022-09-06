@@ -1,4 +1,4 @@
-import { isAfter, parseJSON } from "date-fns";
+import { isAfter, isBefore, parseJSON } from "date-fns";
 import ChallengesService from "../challenges/challenges.service";
 import UsersService from "../users/users.service";
 import { UserChallenge } from "./userChallenge.entity";
@@ -32,7 +32,18 @@ const UserChallengesService = {
     challengeId,
   }: UserIdChallengeIdType): Promise<UserChallenge> {
     await UsersService.userExists(userId);
+    const finishAt = await ChallengesService.getFinishAt(challengeId);
+    const startedAt = await ChallengesService.getStartedAt(challengeId);
 
+    const startedBefore = await this.startedDateVerification({
+      challengeId,
+      userId
+    });
+
+    if (startedBefore == true){
+      throw new Error("Você ainda não tem permissão para iniciar esse dessafio.")
+    }
+        
     const challengeStarted = await UserChallengesModel.count({
       where: {
         userId,
@@ -47,7 +58,6 @@ const UserChallengesService = {
       startedAt: new Date().toString(),
     });
 
-    const finishAt = await ChallengesService.getFinishAt(challengeId);
 
     const finishedAfter = await this.finishDateVerification({ 
       challengeId, 
@@ -103,6 +113,21 @@ const UserChallengesService = {
       });
     }
     return finishedAfter;
+  },
+
+  
+  async startedDateVerification({
+  challengeId,
+  userId
+}: DateVerificationType): Promise<boolean>{
+const startedAt = await ChallengesService.getStartedAt(challengeId);
+if(!startedAt){
+  throw new Error("Este desafio não tem data de inicio")
+ }
+const startedBefore = isBefore(new Date(), parseJSON(startedAt));
+
+
+return startedBefore;
   },
 
   async endChallenge({ 
