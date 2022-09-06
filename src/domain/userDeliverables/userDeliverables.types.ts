@@ -1,15 +1,12 @@
-export interface createUserDeliverable_type {
-  challengeId: string
+export interface createUserDeliverableType {
   userId: string
   challengeDeliverableId: string
   link: string
   explanation: string
 }
 
-export interface updateUserDeliverableId_type {
+export interface updateUserDeliverableIdType {
   userDeliverableId: string
   link: string
   explanation: string
-  challengeId: string
-  userId: string
 }

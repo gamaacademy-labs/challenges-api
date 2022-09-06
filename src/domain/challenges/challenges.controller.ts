@@ -17,6 +17,7 @@ const ChallengeController = {
       });
     }
   },
+  
   async getAllChallenges(req: Request, res: Response) {
     try {
       let data = await ChallengesService.getAllChallenges();

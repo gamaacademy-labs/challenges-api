@@ -1,10 +1,15 @@
-export interface UserIdChallengeId_type {
+export interface UserIdChallengeIdType {
   challengeId: string
   userId: string
 }
 
-export interface DateFinished_type {
+export interface DateFinishedType {
   challengeId: string
   userId: string
   dateFinished: string
+}
+
+export interface DateVerificationType {
+  challengeId: string
+  userId: string
 }

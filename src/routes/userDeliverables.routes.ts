@@ -15,7 +15,12 @@ userDeliverablesRouter.put(
 
 userDeliverablesRouter.get(
   "/userdeliverable/:userDeliverableId",
-  UserDeliverablesController.getDeliverableById
+  UserDeliverablesController.getUserDeliverableById
+);
+
+userDeliverablesRouter.get(
+  "/userdeliverables/:userChallengeId",
+  UserDeliverablesController.getUserDeliverablesByUserChallengeId
 );
 
 export default userDeliverablesRouter;

@@ -32,7 +32,7 @@ const UserChallengesController = {
   async getUserChallenge(req: Request, res: Response) {
     try {
       let { challengeId, userId } = req.body;
-      let data = await UserChallengesService.getUserChallenge({
+      let data = await UserChallengesService.getUserChallengeByUserAndChallenge({
         userId,
         challengeId,
       });
@@ -43,6 +43,7 @@ const UserChallengesController = {
       res.json({ message: err.message });
     }
   },
+  
   async endChallenge(req: Request, res: Response) {
     try {
       let { challengeId, userId } = req.body;

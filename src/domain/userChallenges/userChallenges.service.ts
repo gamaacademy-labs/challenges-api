@@ -3,7 +3,7 @@ import ChallengesService from "../challenges/challenges.service";
 import UsersService from "../users/users.service";
 import { UserChallenge } from "./userChallenge.entity";
 import UserChallengesModel from "./userChallenges.model";
-import { DateFinished_type, UserIdChallengeId_type } from "./userChallenges.types";
+import { DateFinishedType, DateVerificationType, UserIdChallengeIdType } from "./userChallenges.types";
 
 const UserChallengesService = {
   async getScoresByChallenge(challengeId: string): Promise<UserChallenge[]> {
@@ -19,7 +19,7 @@ const UserChallengesService = {
 
     return usersScores as unknown as UserChallenge[];
   },
-
+  
   async getStartedAt(userChallengId:string){
     const startedAt = await UserChallengesModel.findOne({where:{id: userChallengId}})
     if (!startedAt) throw new Error("Desafio não iniciado");
@@ -30,7 +30,7 @@ const UserChallengesService = {
   async startChallenge({
     userId,
     challengeId,
-  }: UserIdChallengeId_type): Promise<UserChallenge> {
+  }: UserIdChallengeIdType): Promise<UserChallenge> {
     await UsersService.userExists(userId);
 
     const challengeStarted = await UserChallengesModel.count({
@@ -47,53 +47,79 @@ const UserChallengesService = {
       startedAt: new Date().toString(),
     });
 
-    const finishAt = await ChallengesService.getFinishAt(challengeId)
-    const finishedAfter = isAfter(new Date(), parseJSON(finishAt))
+    const finishAt = await ChallengesService.getFinishAt(challengeId);
+
+    const finishedAfter = await this.finishDateVerification({ 
+      challengeId, 
+      userId 
+    });
     
     if(finishedAfter == true){
-      this.endChallenge({ challengeId, userId, dateFinished: finishAt })
-      await UserChallengesModel.update({ startedAt: finishAt },
-        {
-          where: {
-            challengeId,
-            userId,
-          },
-        })
+      await UserChallengesModel.update({        
+        startedAt: finishAt 
+      },
+      {
+        where: {
+          challengeId,
+          userId,
+        },
+      })
       throw new Error("Data limite para finalizar o desafio ultrapassada")
     }
     
     return startingChallenge as unknown as UserChallenge;
   },
 
-  async getUserChallenge({
+  async getUserChallengeByUserAndChallenge({
     userId,
     challengeId,
-  }: UserIdChallengeId_type): Promise<UserChallenge> {
+  }: UserIdChallengeIdType): Promise<UserChallenge> {
     await ChallengesService.challengeExists(challengeId);
-
     await UsersService.userExists(userId);
 
     const userChallenge = await UserChallengesModel.findOne({
       where: {
         challengeId,
         userId,
-      },
+      }
     });
     if (!userChallenge) throw new Error("Desafio não iniciado pelo usuário");
 
     return userChallenge as unknown as UserChallenge;
   },
 
+  async finishDateVerification({ 
+    challengeId, 
+    userId 
+  }: DateVerificationType): Promise<boolean> {
+    const finishAt = await ChallengesService.getFinishAt(challengeId);
+    const finishedAfter = isAfter(new Date(), parseJSON(finishAt));
+    
+    if (finishedAfter == true) {
+      this.endChallenge({ 
+        challengeId, 
+        userId, 
+        dateFinished: finishAt 
+      });
+    }
+    return finishedAfter;
+  },
+
   async endChallenge({ 
     challengeId, 
     userId, 
     dateFinished 
-  }: DateFinished_type) {
-    const userChallenge = await this.getUserChallenge({ userId, challengeId });
+  }: DateFinishedType) {
+    const userChallenge = await this.getUserChallengeByUserAndChallenge({ 
+      userId, 
+      challengeId 
+    });
     if (!userChallenge) throw new Error("Desafio não iniciado pelo usuário");
 
     const finishChallenge = await UserChallengesModel.update(
-      { finishedAt: dateFinished },
+      { 
+        finishedAt: dateFinished 
+      },
       {
         where: {
           challengeId,
