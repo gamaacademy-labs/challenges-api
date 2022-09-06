@@ -81,7 +81,7 @@ const UserDeliverablesService = {
       where: {
         id: userDeliverableId,
       },
-      include: "userChallenge",
+      include: "user_challenge",
     });
     if (!userDeliverablesId) throw new Error("Entrega do usuário não encontrada");
 

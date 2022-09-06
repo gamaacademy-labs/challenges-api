@@ -16,7 +16,7 @@ const ChallengesService = {
       where: { 
         id: challengeId 
       },
-      include: "challengeDeliverables",
+      include: "challenge_deliverables",
     });
     if (!challenge) throw new Error("Desafio não encontrado");
 
