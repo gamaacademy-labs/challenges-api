@@ -4,11 +4,9 @@ import UserDeliverablesService from "./userDeliverables.service";
 const UserDeliverablesController = {
   async includeUserDeliverable(req: Request, res: Response) {
     try {
-      let { challengeId, userId, challengeDeliverableId, link, explanation } =
-        req.body;
+      let { userId, challengeDeliverableId, link, explanation } = req.body;
       let data = await UserDeliverablesService.includeUserDeliverable({
         userId,
-        challengeId,
         challengeDeliverableId,
         link,
         explanation,
@@ -24,13 +22,11 @@ const UserDeliverablesController = {
   async updateUserDeliverable(req: Request, res: Response) {
     try {
       let { userDeliverableId } = req.params;
-      let { link, explanation, challengeId, userId } = req.body;
+      let { link, explanation } = req.body;
       let data = await UserDeliverablesService.updateUserDeliverable({
         userDeliverableId,
         link,
-        explanation,
-        challengeId,
-        userId,
+        explanation
       });
       res.status(200);
       res.json(data);
@@ -39,13 +35,30 @@ const UserDeliverablesController = {
       res.json({ message: err.message });
     }
   },
-  async getDeliverableById(req: Request, res: Response) {
+
+  async getUserDeliverableById(req: Request, res: Response) {
     try {
       let userDeliverableId = req.params.userDeliverableId;
 
-      let data = await UserDeliverablesService.getDeliverableById(
+      let data = await UserDeliverablesService.getUserDeliverableById(
         userDeliverableId
       );
+
+      res.status(200);
+      res.json(data);
+    } catch (err: any) {
+      res.status(400);
+      res.json({
+        message: err.message,
+      });
+    }
+  },
+
+  async getUserDeliverablesByUserChallengeId(req: Request, res: Response) {
+    try {
+      let { userChallengeId } = req.params;
+
+      let data = await UserDeliverablesService.getUserDeliverablesByUserChallengeId(userChallengeId);
 
       res.status(200);
       res.json(data);

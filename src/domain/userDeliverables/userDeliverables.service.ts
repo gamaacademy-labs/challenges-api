@@ -1,25 +1,35 @@
-import ChallengesService from "../challenges/challenges.service";
+import ChallengeDeliverablesService from "../challengeDeliverables/challengeDeliverables.service";
 import UserChallengesService from "../userChallenges/userChallenges.service";
 import { UserDeliverable } from "./userDeliverable.entity";
 import UserDeliverablesModel from "./userDeliverables.model";
-import { createUserDeliverable_type, updateUserDeliverableId_type } from "./userDeliverables.types";
+import { createUserDeliverableType, updateUserDeliverableIdType } from "./userDeliverables.types";
 
 const UserDeliverablesService = {
   async includeUserDeliverable({
     userId,
-    challengeId,
     challengeDeliverableId,
     link,
     explanation,
-  }: createUserDeliverable_type): Promise<UserDeliverable> {
-    const getUserChallenge = await UserChallengesService.getUserChallenge({
+  }: createUserDeliverableType): Promise<UserDeliverable> {
+    const challengeDeliverable = await ChallengeDeliverablesService.getChallengeDeliverableById(challengeDeliverableId);
+    const challengeId = challengeDeliverable.challengeId;
+    
+    const getUserChallenge = await UserChallengesService.getUserChallengeByUserAndChallenge({
       userId,
       challengeId,
     });
     const userChallengeId = getUserChallenge.id;
     if (!userChallengeId) throw new Error("Desafio não iniciado pelo usuário");
+    if (getUserChallenge.finishedAt) throw new Error("Desafio já finalizado");
 
-    await ChallengesService.finishDateVerification(challengeId);
+    const finishedAfter = await UserChallengesService.finishDateVerification({ 
+      challengeId, 
+      userId,
+    });
+
+    if(finishedAfter == true){
+      throw new Error("Data limite para finalizar o desafio ultrapassada")
+    };
 
     const includeUserDeliverable = await UserDeliverablesModel.create({
       userChallengeId,
@@ -32,20 +42,25 @@ const UserDeliverablesService = {
   },
 
   async updateUserDeliverable({
-    link,
-    explanation,
     userDeliverableId,
-    challengeId,
-    userId,
-  }: updateUserDeliverableId_type) {
-    const getUserChallenge = await UserChallengesService.getUserChallenge({
-      userId,
-      challengeId,
-    });
-    const userChallengefinished = getUserChallenge.finishedAt;
-    if (userChallengefinished) throw new Error("Desafio já finalizado");
+    link,
+    explanation
+  }: updateUserDeliverableIdType) {
+    const userDeliverable = await this.getUserDeliverableById(userDeliverableId);
+    const userChallenge = userDeliverable.userChallenges;
+    if (!userChallenge) throw new Error("Desafio não iniciado pelo usuário");
 
-    await ChallengesService.finishDateVerification(challengeId);
+    const userChallengeFinished = userChallenge.finishedAt;
+    if (userChallengeFinished) throw new Error("Desafio já finalizado");
+
+    const finishedAfter = await UserChallengesService.finishDateVerification({ 
+      challengeId: userChallenge.challengeId, 
+      userId: userChallenge.userId,
+    });
+
+    if(finishedAfter == true){
+      throw new Error("Data limite para finalizar o desafio ultrapassada")
+    }
 
     const updateUserDeliverable = await UserDeliverablesModel.update(
       {
@@ -61,15 +76,27 @@ const UserDeliverablesService = {
     return updateUserDeliverable;
   },
 
-  async getDeliverableById(userDeliverableId: string): Promise<UserDeliverable> {
+  async getUserDeliverableById(userDeliverableId: string): Promise<UserDeliverable> {
     let userDeliverablesId = await UserDeliverablesModel.findOne({
       where: {
         id: userDeliverableId,
       },
+      include: "userChallenge",
     });
-    if (!userDeliverablesId) throw new Error("Desafio não encontrado");
+    if (!userDeliverablesId) throw new Error("Entrega do usuário não encontrada");
 
     return userDeliverablesId.get({ plain: true });
+  },
+
+  async getUserDeliverablesByUserChallengeId(userChallengeId: string): Promise<UserDeliverable[]> {
+    const userDeliverables = await UserDeliverablesModel.findAll({
+      where: {
+        userChallengeId,
+      }
+    });
+    if (!userDeliverables) throw new Error("Ainda não há entregas deste usuário para este desafio");
+
+    return userDeliverables as unknown as UserDeliverable[];
   },
 };
 
