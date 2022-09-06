@@ -63,7 +63,7 @@ ChallengesModel.init(
 ChallengesModel.hasMany(ChallengeDeliverablesModel, {
   foreignKey: "challenge_id",
   sourceKey: "id",
-  as: "challenges_deliverables"
+  as: "challengeDeliverables"
 });
 
 export default ChallengesModel;
