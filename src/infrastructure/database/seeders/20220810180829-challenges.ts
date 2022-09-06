@@ -18,6 +18,7 @@ export default {
           tags: "a, b, c",
           score: "12",
           answers: "Lorem ipsum dolor sit amet",
+          startedAt: "2020-08-01 23:59:59",
           finishAt: "2020-09-01 23:59:59",
         },
         {
@@ -30,6 +31,7 @@ export default {
           tags: "a, b, c",
           score: "12",
           answers: "Lorem ipsum dolor sit amet",
+          startedAt: "2022-09-01 23:59:59",
           finishAt: "2022-10-01 23:59:59",
         },
         {
@@ -42,6 +44,7 @@ export default {
           tags: "a, b, c",
           score: "12",
           answers: "Lorem ipsum dolor sit amet",
+          startedAt: "",
           finishAt: "2022-11-01 23:59:59",
         },
       ],

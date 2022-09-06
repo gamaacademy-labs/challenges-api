@@ -47,6 +47,10 @@ ChallengesModel.init(
       type: DataTypes.STRING,
       allowNull: false
     },
+    startedAt: {
+      type: DataTypes.DATE,
+      allowNull: true
+    }, 
     finishAt: {
       type: DataTypes.DATE,
       allowNull: false
