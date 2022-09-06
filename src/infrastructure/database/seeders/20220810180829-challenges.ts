@@ -44,7 +44,7 @@ export default {
           tags: "a, b, c",
           score: "12",
           answers: "Lorem ipsum dolor sit amet",
-          startedAt: "2022-10-01 23:59:59",
+          startedAt: "",
           finishAt: "2022-11-01 23:59:59",
         },
       ],
