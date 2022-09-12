@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import UserChallengesService from "./userChallenges.service";
+import { UserIdChallengeIdType } from "./userChallenges.types";
 
 const UserChallengesController = {
   async getScoresByChallenge(req: Request, res: Response) {
@@ -14,9 +15,10 @@ const UserChallengesController = {
     }
   },
 
-  async startChallenge(req: Request, res: Response) {
+  async startChallenge(req: Request<any, any, any, UserIdChallengeIdType>, res: Response) {
     try {
-      let { challengeId, userId } = req.body;
+      let { challengeId } = req.params;
+      let { userId } = req.query;
       let data = await UserChallengesService.startChallenge({
         userId,
         challengeId,
@@ -29,12 +31,13 @@ const UserChallengesController = {
     }
   },
 
-  async getUserChallenge(req: Request, res: Response) {
+  async getUserChallenge(req: Request<any, any, any, UserIdChallengeIdType>, res: Response) {
     try {
-      let { challengeId, userId } = req.body;
+      let { challengeId } = req.params;
+      let { userId } = req.query;
       let data = await UserChallengesService.getUserChallengeByUserAndChallenge({
-        userId,
         challengeId,
+        userId
       });
       res.status(200);
       res.json(data);
@@ -44,13 +47,14 @@ const UserChallengesController = {
     }
   },
   
-  async endChallenge(req: Request, res: Response) {
+  async endChallenge(req: Request<any, any, any, UserIdChallengeIdType>, res: Response) {
     try {
-      let { challengeId, userId } = req.body;
+      let { challengeId } = req.params;
+      let { userId } = req.query;
       let dateFinished = new Date().toString();
       let data = await UserChallengesService.endChallenge({
-        userId,
         challengeId,
+        userId,
         dateFinished,
       });
       res.status(200);

@@ -4,12 +4,12 @@ import UserDeliverablesController from "../domain/userDeliverables/userDeliverab
 const userDeliverablesRouter = express.Router();
 
 userDeliverablesRouter.post(
-  "/userdeliverable",
+  "/userdeliverable/:challengeDeliverableId/deliverable",
   UserDeliverablesController.includeUserDeliverable
 );
 
 userDeliverablesRouter.put(
-  "/userdeliverable/:userDeliverableId",
+  "/userdeliverable/:userDeliverableId/refresh",
   UserDeliverablesController.updateUserDeliverable
 );
 

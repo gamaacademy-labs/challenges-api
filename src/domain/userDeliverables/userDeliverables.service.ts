@@ -2,21 +2,21 @@ import ChallengeDeliverablesService from "../challengeDeliverables/challengeDeli
 import UserChallengesService from "../userChallenges/userChallenges.service";
 import { UserDeliverable } from "./userDeliverable.entity";
 import UserDeliverablesModel from "./userDeliverables.model";
-import { createUserDeliverableType, updateUserDeliverableIdType } from "./userDeliverables.types";
+import { CreateUserDeliverableType, UpdateUserDeliverableIdType } from "./userDeliverables.types";
 
 const UserDeliverablesService = {
   async includeUserDeliverable({
-    userId,
     challengeDeliverableId,
+    userId,
     link,
     explanation,
-  }: createUserDeliverableType): Promise<UserDeliverable> {
+  }: CreateUserDeliverableType): Promise<UserDeliverable> {
     const challengeDeliverable = await ChallengeDeliverablesService.getChallengeDeliverableById(challengeDeliverableId);
     const challengeId = challengeDeliverable.challengeId;
     
     const getUserChallenge = await UserChallengesService.getUserChallengeByUserAndChallenge({
-      userId,
       challengeId,
+      userId,
     });
     const userChallengeId = getUserChallenge.id;
     if (!userChallengeId) throw new Error("Desafio não iniciado pelo usuário");
@@ -32,8 +32,8 @@ const UserDeliverablesService = {
     };
 
     const includeUserDeliverable = await UserDeliverablesModel.create({
-      userChallengeId,
       challengeDeliverableId,
+      userChallengeId,
       link,
       explanation,
     });
@@ -45,9 +45,11 @@ const UserDeliverablesService = {
     userDeliverableId,
     link,
     explanation
-  }: updateUserDeliverableIdType) {
+  }: UpdateUserDeliverableIdType) {
+   
     const userDeliverable = await this.getUserDeliverableById(userDeliverableId);
     const userChallenge = userDeliverable.userChallenges;
+    console.log(userChallenge)
     if (!userChallenge) throw new Error("Desafio não iniciado pelo usuário");
 
     const userChallengeFinished = userChallenge.finishedAt;
@@ -81,7 +83,7 @@ const UserDeliverablesService = {
       where: {
         id: userDeliverableId,
       },
-      include: "user_challenge",
+      include: "userChallenges",
     });
     if (!userDeliverablesId) throw new Error("Entrega do usuário não encontrada");
 
