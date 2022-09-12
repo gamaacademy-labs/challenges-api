@@ -41,7 +41,7 @@ const UserChallengesService = {
     });
 
     if (startedBefore == true){
-      throw new Error("Você ainda não tem permissão para iniciar esse dessafio.")
+      throw new Error("Você ainda não tem permissão para iniciar esse desafio.")
     }
         
     const challengeStarted = await UserChallengesModel.count({
@@ -121,7 +121,7 @@ const UserChallengesService = {
 }: DateVerificationType): Promise<boolean>{
 const startedAt = await ChallengesService.getStartedAt(challengeId);
 if(!startedAt){
-  throw new Error("Este desafio não tem data de inicio")
+  throw new Error("Este desafio não tem data de início")
  }
 const startedBefore = isBefore(new Date(), parseJSON(startedAt));
 
