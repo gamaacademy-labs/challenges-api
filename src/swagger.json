@@ -1,0 +1,848 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "API de Desafios - Gama Lab",
+        "description": "Essa API verifica os endpoints da parte de Desafios do Gama Lab",
+        "version": "1.0.0"
+    },
+    "servers":[
+        {
+            "url": "http://localhost:3350/v1",
+            "description": "API de teste"
+        }
+    ],
+    "paths": {
+        "/users/{userId}": {
+            "get": {
+                "summary": "Exibir usuário através da busca pelo nome",
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "Nome do usuário",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Users"
+                                }
+                            }
+
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "headers": {
+                            "Usuario":
+                            {
+                                "description": "Usuário não encontrado"
+                            }                          
+                        }
+                    }
+                }
+            }
+        },
+        "/challenges": {
+            "get": {
+                "summary": "Exibir todos os desafios",
+                "tags": ["Challenges"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Challenges"
+                                }
+                            }
+
+                        }
+                    },
+                    "400":{
+                        "description": "Não há desafios cadastrados"
+                    }
+                }
+            }
+        },
+        "/challenges/{challengeId}": {
+            "get": {
+                "summary": "Exibir desafio e entregáveis através da busca pelo id do desafio",
+                "tags": ["Challenges"],
+                "parameters": [
+                    {
+                        "name": "challengeId",
+                        "in": "path",
+                        "description": "Id do desafio",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/ChallengesById"
+                                }
+                            }
+
+                        }
+                    },
+                    "400":{
+                        "description": "Desafio não encontrado"
+                    }
+                }
+            }
+        },
+        "/materials/{challengeId}": {
+            "get": {
+                "summary": "Exibir materiais do desafio através da busca pelo id do desafio",
+                "tags": ["Materials"],
+                "parameters": [
+                    {
+                        "name": "challengeId",
+                        "in": "path",
+                        "description": "Id do desafio",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Materials"
+                                }
+                            }
+
+                        }
+                    },
+                    "400": {
+                        "description": "Desafio não encontrado"
+                    }
+                }
+            }
+        },
+        "/challenge/{challengeId}/ranking": {
+            "get": {
+                "summary": "Exibir o ranking de pontuação do desafio, em ordem decrescente, através da busca pelo id do desafio",
+                "tags": ["User Challenges"],
+                "parameters": [
+                    {
+                        "name": "challengeId",
+                        "in": "path",
+                        "description": "Id do desafio",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/RankingById"
+                                }
+                            }
+
+                        }
+                    },
+                    "400": {
+                        "description": "Desafio não encontrado"
+                    }
+                }
+            }
+        },
+        "/userchallenge/{challengeId}": {
+            "get": {
+                "summary": "Listar desafio do usuário através da busca pelo id do desafio e id do usuário",
+                "tags": ["User Challenges"],
+                "parameters": [
+                    {
+                        "name": "challengeId",
+                        "in": "path",
+                        "description": "Id do desafio",
+                        "required": true
+                    },
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "Id do usuário",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/UserChallenges"
+                                }
+                            }
+
+                        }
+                    },
+                    "400":{
+                        "description": "Bad Request",
+                        "headers": {
+                            "Desafio": 
+                            {
+                                "description": "Desafio não encontrado"
+                            },
+                            "Usuario":
+                            {
+                                "description": "Usuário não encontrado"
+                            },
+                            "Iniciar-desafio":
+                            {
+                                "description": "Desafio não iniciado pelo usuário"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/userchallenge/{challengeId}/start": {
+            "post": {
+                "summary": "Iniciar desafio do usuário através do id do desafio e id do usuário",
+                "tags": ["User Challenges"],
+                "parameters": [
+                    {
+                        "name": "challengeId",
+                        "in": "path",
+                        "description": "Id do desafio",
+                        "required": true
+                    },
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "Id do usuário",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/StartChallenge"
+                                }
+                            }
+
+                        }
+                    },
+                    "400":{
+                        "description": "Bad Request",
+                        "headers": {
+                            "Desafio": 
+                            {
+                                "description": "Desafio não encontrado"
+                            },
+                            "Usuario":
+                            {
+                                "description": "Usuário não encontrado"
+                            },
+                            "Data-inicio": {
+                                "description": "Este desafio não tem data de início"
+                            },
+                            "Desafio-iniciado": {
+                                "description": "Desafio já foi iniciado"
+                            },
+                            "Data-limite": {
+                                "description": "Data limite para finalizar o desafio ultrapassada"
+                            },                            
+                            "Permissao":
+                            {
+                                "description": "Você ainda não tem permissão para iniciar esse desafio"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/userchallenge/{challengeId}/end": {
+            "put": {
+                "summary": "Finalizar desafio do usuário através do id do desafio e id do usuário",
+                "tags": ["User Challenges"],
+                "parameters": [
+                    {
+                        "name": "challengeId",
+                        "in": "path",
+                        "description": "Id do desafio",
+                        "required": true
+                    },
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "Id do usuário",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "headers": {
+                            "Desafio": 
+                            {
+                                "description": "Desafio não encontrado"
+                            },
+                            "Usuario":
+                            {
+                                "description": "Usuário não encontrado"
+                            },
+                            "Data-inicio": {
+                                "description": "Este desafio não tem data de início"
+                            },
+                            "Desafio-iniciado": {
+                                "description": "Desafio já foi iniciado"
+                            },
+                            "Data-limite": {
+                                "description": "Data limite para finalizar o desafio ultrapassada"
+                            },                            
+                            "Permissao":
+                            {
+                                "description": "Você ainda não tem permissão para iniciar esse desafio"
+                            }                          
+                        }
+                    }
+                }
+            }
+        },
+        "/userdeliverable/{challengeDeliverableId}/deliverable": {
+            "post": {
+                "summary": "Inserir a entrega de um usuário",
+                "tags": ["User Deliverables"],
+                "parameters": [
+                    {
+                        "name": "challengeDeliverableId",
+                        "in": "path",
+                        "description": "Id da entrega do desafio",
+                        "required": true
+                    },
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "Id do usuário",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "link":
+                                    {
+                                        "type": "string"
+                                    },
+                                    "explanation":
+                                    {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/IncludesUserDeliverables"
+                                }
+                            }
+
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "headers": {
+                            "Usuario":
+                            {
+                                "description": "Usuário não encontrado"
+                            }                          
+                        }
+                    }
+                }
+            }
+        },
+        "/userdeliverable/{userDeliverableId}": {
+            "get": {
+                "summary": "Exibir a entrega do usuário através da busca pelo id da entrega do usuário",
+                "tags": ["User Deliverables"],
+                "parameters": [
+                    {
+                        "name": "userDeliverableId",
+                        "in": "path",
+                        "description": "Id da entrega do usuário",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/UserDeliverables"
+                                }
+                            }
+
+                        }
+                    },
+                    "400": {
+                        "description": "Entrega do usuário não encontrada"
+                    }
+                }
+            }
+        },
+        "/userdeliverables/{userChallengeId}": {
+            "get": {
+                "summary": "Exibir a entrega do usuário através da busca pelo id do desafio do usuário",
+                "tags": ["User Deliverables"],
+                "parameters": [
+                    {
+                        "name": "userChallengeId",
+                        "in": "path",
+                        "description": "Id do desafio do usuário",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/UserDeliverablesByUserChallengeId"
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        },
+        "/userdeliverable/{userDeliverableId}/refresh": {
+            "put": {
+                "summary": "Alterar a entrega de um usuário",
+                "tags": ["User Deliverables"],
+                "parameters": [
+                    {
+                        "name": "userDeliverableId",
+                        "in": "path",
+                        "description": "Id da entrega do usuário",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "link":
+                                    {
+                                        "type": "string"
+                                    },
+                                    "explanation":
+                                    {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/UserDeliverables"
+                                }
+                            }
+
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "headers": {
+                            "Usuario":
+                            {
+                                "description": "Entrega do usuário não encontrada"
+                            }                          
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components":{
+        "schemas":{
+            "Users":{
+                "type": "object",
+                "properties": {
+                    "id":
+                    {
+                        "type": "string"
+                    },
+                    "name":
+                    {
+                        "type": "string"
+                    },
+                    "createdAt":
+                    {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Challenges": {
+                "type": "object",
+                "properties": {
+                    "id":
+                    {
+                        "type": "string"
+                    },
+                    "title":
+                    {
+                        "type": "string"
+                    },                    
+                    "description":
+                    {
+                        "type": "string"
+                    },
+                    "thumbnail":
+                    {
+                        "type": "string"
+                    },
+                    "level":
+                    {
+                        "type": "string"
+                    },
+                    "instruction":
+                    {
+                        "type": "string"
+                    },
+                    "tags":
+                    {
+                        "type": "string"
+                    },
+                    "score":
+                    {
+                        "type": "string"
+                    },
+                    "answers":
+                    {
+                        "type": "string"
+                    },
+                    "startedAt":
+                    {
+                        "type": "string"
+                    },
+                    "finishAt":
+                    {
+                        "type": "string"
+                    },
+                    "createdAt":
+                    {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ChallengesById": {
+                "type": "object",
+                "properties": {
+                    "challenges":
+                    {
+                        "$ref": "#/components/schemas/Challenges"
+                    },
+                    "challenges_deliverables": {
+                        "$ref": "#/components/schemas/ChallengesDeliverables"
+                    }
+                }
+            },
+            "ChallengesDeliverables": {
+                "type": "object",
+                "properties": {
+                    "id":
+                    {
+                        "type": "string"
+                    },
+                    "title":
+                    {
+                        "type": "string"
+                    },                    
+                    "description":
+                    {
+                        "type": "string"
+                    },
+                    "averageTime":
+                    {
+                        "type": "integer"
+                    },
+                    "challengeId":
+                    {
+                        "type": "string"
+                    },
+                    "createdAt":
+                    {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    "challenge_id":
+                    {
+                        "type": "string"
+                    }
+                }
+            },
+            "Materials": {
+                "type": "object",
+                "properties": {
+                    "id":
+                    {
+                        "type": "string"
+                    },
+                    "title":
+                    {
+                        "type": "string"
+                    },                    
+                    "link":
+                    {
+                        "type": "string"
+                    },
+                    "type":
+                    {
+                        "type": "string"
+                    },
+                    "challengeId":
+                    {
+                        "type": "string"
+                    },
+                    "createdAt":
+                    {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UserChallenges": {
+                "type": "object",
+                "properties": {
+                    "id":
+                    {
+                        "type": "string"
+                    },
+                    "score":
+                    {
+                        "type": "string"
+                    },
+                    "startedAt":
+                    {
+                        "type": "string"
+                    },
+                    "finishedAt":
+                    {
+                        "type": "string"
+                    },
+                    "challengeId":
+                    {
+                        "type": "string"
+                    },
+                    "userId":
+                    {
+                        "type": "string"
+                    },
+                    "createdAt":
+                    {
+                        "type": "string"
+                    },
+                    "updatedAt":
+                    {
+                        "type": "string"
+                    }                                   
+                }
+            },
+            "RankingById": {
+                "type": "object",
+                "properties": {
+                    "userChallenge":
+                    {
+                        "$ref": "#/components/schemas/UserChallenges"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/Users"
+                    }                                   
+                }
+            },
+            "StartChallenge": {
+                "type": "object",
+                "properties": {
+                    "id":
+                    {
+                        "type": "string"
+                    },
+                    "userId":
+                    {
+                        "type": "string"
+                    },
+                    "challengeId":
+                    {
+                        "type": "string"
+                    },
+                    "startedAt":
+                    {
+                        "type": "string"
+                    },
+                    "updatedAt":
+                    {
+                        "type": "string"
+                    },
+                    "createdAt":
+                    {
+                        "type": "string"
+                    }                                   
+                }
+            },
+            "UserDeliverables": {
+                "type": "object",
+                "properties": {
+                    "id":
+                    {
+                        "type": "string"
+                    },
+                    "link":
+                    {
+                        "type": "string"
+                    },
+                    "explanation":
+                    {
+                        "type": "string"
+                    },
+                    "userChallengeId":
+                    {
+                        "type": "string"
+                    },
+                    "challengeDeliverableId":
+                    {
+                        "type": "string"
+                    },
+                    "createdAt":
+                    {
+                        "type": "string"
+                    },
+                    "updatedAt":
+                    {
+                        "type": "string"
+                    },
+                    "user_challenge": {
+                        "$ref": "#/components/schemas/UserChallenge"
+                    }                                   
+                }
+            },
+            "UserDeliverablesByUserChallengeId": {
+                "type": "object",
+                "properties": {
+                    "id":
+                    {
+                        "type": "string"
+                    },
+                    "link":
+                    {
+                        "type": "string"
+                    },
+                    "explanation":
+                    {
+                        "type": "string"
+                    },
+                    "userChallengeId":
+                    {
+                        "type": "string"
+                    },
+                    "challengeDeliverableId":
+                    {
+                        "type": "string"
+                    },
+                    "createdAt":
+                    {
+                        "type": "string"
+                    },
+                    "updatedAt":
+                    {
+                        "type": "string"
+                    }                                
+                }
+            },
+            "IncludesUserDeliverables": {
+                "type": "object",
+                "properties": {
+                    "id":
+                    {
+                        "type": "string"
+                    },
+                    "userChallengeId":
+                    {
+                        "type": "string"
+                    },
+                    "challengeDeliverableId":
+                    {
+                        "type": "string"
+                    },
+                    "link":
+                    {
+                        "type": "string"
+                    },
+                    "explanation":
+                    {
+                        "type": "string"
+                    },
+                    "updatedAt":
+                    {
+                        "type": "string"
+                    },
+                    "createdAt":
+                    {
+                        "type": "string"
+                    }                                  
+                }
+            }
+        }
+    }
+}
