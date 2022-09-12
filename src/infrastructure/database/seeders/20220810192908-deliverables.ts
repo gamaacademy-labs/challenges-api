@@ -23,6 +23,14 @@ export default {
             "Sed non metus sapien. Aenean et ornare augue, sit amet sagittis nisi.",
           averageTime: 30,
           challengeId: "be9316ba-90de-4860-90a4-d4bb8e1846db"
+        },
+        {
+          id: "28a6605a-42dd-4ba2-a948-4226035ccc99",
+          title: "Venenatis magna",
+          description:
+            "Aenean et ornare augue, sit amet sagittis nisi.",
+          averageTime: 15,
+          challengeId: "886471b9-00df-4a9d-9138-4fbe703c9569"
         }
       ],
       {}

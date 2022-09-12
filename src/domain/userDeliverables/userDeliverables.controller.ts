@@ -1,13 +1,16 @@
 import { Request, Response } from "express";
 import UserDeliverablesService from "./userDeliverables.service";
+import { CreateUserDeliverableType } from "./userDeliverables.types";
 
 const UserDeliverablesController = {
-  async includeUserDeliverable(req: Request, res: Response) {
+  async includeUserDeliverable(req: Request<any, any, any, CreateUserDeliverableType>, res: Response) {
     try {
-      let { userId, challengeDeliverableId, link, explanation } = req.body;
+      let { challengeDeliverableId } = req.params;
+      let { userId } = req.query;
+      let { link, explanation } = req.body;
       let data = await UserDeliverablesService.includeUserDeliverable({
-        userId,
         challengeDeliverableId,
+        userId,
         link,
         explanation,
       });

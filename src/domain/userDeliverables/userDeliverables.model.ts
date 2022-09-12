@@ -48,7 +48,7 @@ UserDeliverablesModel.init({
 UserDeliverablesModel.hasOne(UserChallengesModel, {
     foreignKey: "id",
     sourceKey: "userChallengeId",
-    as: "user_challenge"
+    as: "userChallenges"
 });
 
 UserDeliverablesModel.hasOne(ChallengeDeliverablesModel, {

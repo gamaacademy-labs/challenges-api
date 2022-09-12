@@ -28,8 +28,8 @@ const UserChallengesService = {
   },
 
   async startChallenge({
-    userId,
     challengeId,
+    userId
   }: UserIdChallengeIdType): Promise<UserChallenge> {
     await UsersService.userExists(userId);
     const finishAt = await ChallengesService.getFinishAt(challengeId);
@@ -46,15 +46,15 @@ const UserChallengesService = {
         
     const challengeStarted = await UserChallengesModel.count({
       where: {
-        userId,
         challengeId,
+        userId,
       },
     });
     if (challengeStarted == 1) throw new Error("Desafio já foi iniciado");
 
     const startingChallenge = await UserChallengesModel.create({
-      userId,
       challengeId,
+      userId,
       startedAt: new Date().toString(),
     });
 
@@ -81,8 +81,7 @@ const UserChallengesService = {
   },
 
   async getUserChallengeByUserAndChallenge({
-    userId,
-    challengeId,
+    challengeId,userId
   }: UserIdChallengeIdType): Promise<UserChallenge> {
     await ChallengesService.challengeExists(challengeId);
     await UsersService.userExists(userId);
@@ -136,8 +135,8 @@ return startedBefore;
     dateFinished 
   }: DateFinishedType) {
     const userChallenge = await this.getUserChallengeByUserAndChallenge({ 
-      userId, 
-      challengeId 
+      challengeId, 
+      userId
     });
     if (!userChallenge) throw new Error("Desafio não iniciado pelo usuário");
 
@@ -152,7 +151,7 @@ return startedBefore;
         },
       }
     );
-    return finishChallenge;
+    return "Desafio finalizado";
   },
 };
 

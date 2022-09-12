@@ -4,19 +4,19 @@ import UserChallengesController from "../domain/userChallenges/userChallenges.co
 const userChallengesRouter = express.Router();
 
 userChallengesRouter.get(
-  "/ranking/:challengeId",
+  "/challenge/:challengeId/ranking",
   UserChallengesController.getScoresByChallenge
 );
 userChallengesRouter.get(
-  "/userchallenge",
+  "/userchallenge/:challengeId",
   UserChallengesController.getUserChallenge
 );
 userChallengesRouter.post(
-  "/startchallenge",
+  "/userchallenge/:challengeId/start",
   UserChallengesController.startChallenge
 );
 userChallengesRouter.put(
-  "/endchallenge",
+  "/userchallenge/:challengeId/end",
   UserChallengesController.endChallenge
 );
 
