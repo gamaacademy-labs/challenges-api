@@ -14,6 +14,13 @@ export default {
           userId: "e5663bae-95b9-4a36-a836-2006a3bc0453",
         },
         {
+          id: "43c72a4b-83e8-49ce-ac00-2f26a0e07b67",
+          score: "877",
+          startedAt: new Date().toString(),
+          challengeId: "be9316ba-90de-4860-90a4-d4bb8e1846db",
+          userId: "db1526a7-907f-4d47-b284-d4186e4c5c98",
+        },
+        {
           id: "e23857e7-7ffa-4978-97af-5669ff95b665",
           score: "587",
           startedAt: new Date().toString(),
