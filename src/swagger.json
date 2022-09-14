@@ -60,15 +60,23 @@
                             "application/json":{
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/Challenges"
+                                    "$ref": "#/components/schemas/allChallenges"
                                 }
                             }
 
                         }
                     },
                     "400":{
-                        "description": "Não há desafios cadastrados"
+                        "description": "Bad request",
+                        "headers": {
+                            "Usuario":
+                            {
+                                "description": "Não há desafios cadastrados"
+                            }                          
+                        }
                     }
+                    
+                    
                 }
             }
         },
@@ -415,7 +423,13 @@
                         }
                     },
                     "400": {
-                        "description": "Entrega do usuário não encontrada"
+                        "description": "Bad request",
+                        "headers": {
+                            "Usuario":
+                            {
+                                "description": "Entrega do usuário não encontrada"
+                            }                          
+                        }
                     }
                 }
             }
@@ -443,6 +457,15 @@
                                 }
                             }
 
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "headers": {
+                            "Usuario":
+                            {
+                                "description": "Ainda não há entregas deste usuário para este desafio"
+                            }                          
                         }
                     }
                 }
@@ -529,7 +552,7 @@
             },
             "Challenges": {
                 "type": "object",
-                "properties": {
+                "properties": { 
                     "id":
                     {
                         "type": "string"
@@ -583,15 +606,67 @@
                     }
                 }
             },
+            "allChallenges": {
+                "type": "array",
+                "items": {"$ref": "#/components/schemas/Challenges"}
+            },
             "ChallengesById": {
                 "type": "object",
                 "properties": {
-                    "challenges":
+                    "id":
                     {
-                        "$ref": "#/components/schemas/Challenges"
+                        "type": "string"
+                    },
+                    "title":
+                    {
+                        "type": "string"
+                    },                    
+                    "description":
+                    {
+                        "type": "string"
+                    },
+                    "thumbnail":
+                    {
+                        "type": "string"
+                    },
+                    "level":
+                    {
+                        "type": "string"
+                    },
+                    "instruction":
+                    {
+                        "type": "string"
+                    },
+                    "tags":
+                    {
+                        "type": "string"
+                    },
+                    "score":
+                    {
+                        "type": "string"
+                    },
+                    "answers":
+                    {
+                        "type": "string"
+                    },
+                    "startedAt":
+                    {
+                        "type": "string"
+                    },
+                    "finishAt":
+                    {
+                        "type": "string"
+                    },
+                    "createdAt":
+                    {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
                     },
                     "challenges_deliverables": {
-                        "$ref": "#/components/schemas/ChallengesDeliverables"
+                        "type": "array",
+                        "items": {"$ref": "#/components/schemas/ChallengesDeliverables"}
                     }
                 }
             },
@@ -700,17 +775,50 @@
                     }                                   
                 }
             },
-            "RankingById": {
+            "Ranking": {
                 "type": "object",
                 "properties": {
-                    "userChallenge":
+                    "id":
                     {
-                        "$ref": "#/components/schemas/UserChallenges"
+                        "type": "string"
                     },
-                    "user": {
+                    "score":
+                    {
+                        "type": "string"
+                    },
+                    "startedAt":
+                    {
+                        "type": "string"
+                    },
+                    "finishedAt":
+                    {
+                        "type": "string"
+                    },
+                    "challengeId":
+                    {
+                        "type": "string"
+                    },
+                    "userId":
+                    {
+                        "type": "string"
+                    },
+                    "createdAt":
+                    {
+                        "type": "string"
+                    },
+                    "updatedAt":
+                    {
+                        "type": "string"
+                    },
+                    "user":
+                    {
                         "$ref": "#/components/schemas/Users"
                     }                                   
                 }
+            },
+            "RankingById": {
+                "type": "array",
+                "items": {"$ref": "#/components/schemas/Ranking"} 
             },
             "StartChallenge": {
                 "type": "object",
