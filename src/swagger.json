@@ -444,6 +444,15 @@
                             }
 
                         }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "headers": {
+                            "Usuario":
+                            {
+                                "description": "Ainda não há entregas deste usuário para este desafio"
+                            }                          
+                        }
                     }
                 }
             }
