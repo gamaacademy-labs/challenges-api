@@ -27,25 +27,6 @@ describe('No controller de ChallengeMaterials ao executar a função', () => {
           "updatedAt": "2022-09-13T19:02:17.000Z"
         }
       ]).toEqual(expect.arrayContaining(expected))
-      // expect(expectResponse.status).toBe(200);
-      // expect(expectResponse.body.id).toBeTruthy()
-      // expect(expectResponse.body.title).toBeTruthy()
-      // expect(expectResponse.body.link).toBeTruthy()
-      // expect(expectResponse.body.type).toBeTruthy()
-      // expect(expectResponse.body.challengeId).toBeTruthy()
-      // expect(expectResponse.body.createdAt).toBeTruthy()
-      // expect(expectResponse.body.updatedAt).toBeTruthy()
     });
   });
 });
-
-
-// describe('arrayContaining', () => {
-//   const expected = ['Alice', 'Bob'];
-//   it('matches even if received contains additional elements', () => {
-//     expect(['Alice', 'Bob', 'Eve']).toEqual(expect.arrayContaining(expected));
-//   });
-//   it('does not match if received does not contain expected elements', () => {
-//     expect(['Bob', 'Eve']).not.toEqual(expect.arrayContaining(expected));
-//   });
-// });
