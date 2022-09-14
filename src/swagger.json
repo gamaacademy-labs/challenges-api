@@ -67,8 +67,16 @@
                         }
                     },
                     "400":{
-                        "description": "Não há desafios cadastrados"
+                        "description": "Bad request",
+                        "headers": {
+                            "Usuario":
+                            {
+                                "description": "Não há desafios cadastrados"
+                            }                          
+                        }
                     }
+                    
+                    
                 }
             }
         },
@@ -415,7 +423,13 @@
                         }
                     },
                     "400": {
-                        "description": "Entrega do usuário não encontrada"
+                        "description": "Bad request",
+                        "headers": {
+                            "Usuario":
+                            {
+                                "description": "Entrega do usuário não encontrada"
+                            }                          
+                        }
                     }
                 }
             }
@@ -443,6 +457,15 @@
                                 }
                             }
 
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "headers": {
+                            "Usuario":
+                            {
+                                "description": "Ainda não há entregas deste usuário para este desafio"
+                            }                          
                         }
                     }
                 }
