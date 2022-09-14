@@ -35,6 +35,20 @@ export default {
           challengeId: "661d66e4-b36a-49a9-b2af-f5464ef59acb",
           userId: "8857ecdf-c704-40f2-9cbe-f55096f1f331",
         },
+        {
+          id: "3aeccdb5-d3b8-4284-8a07-913d1709245a",
+          score: "200",
+          startedAt: new Date().toString(),
+          challengeId: "86d17248-3388-4412-9616-625672c045f9",
+          userId: "8857ecdf-c704-40f2-9cbe-f55096f1f331",
+        },
+        {
+          id: "1875e894-9c3e-4589-ad25-99ff2c61400e",
+          score: "200",
+          startedAt: new Date().toString(),
+          challengeId: "886471b9-00df-4a9d-9138-4fbe703c9569",
+          userId: "8857ecdf-c704-40f2-9cbe-f55096f1f331",
+        },
       ],
       {}
     );

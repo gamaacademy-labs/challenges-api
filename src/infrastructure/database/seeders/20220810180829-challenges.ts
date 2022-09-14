@@ -59,6 +59,19 @@ export default {
           startedAt: "2022-09-07 23:59:59",
           finishAt: "2022-10-01 23:59:59",
         },
+        {
+          id: "86d17248-3388-4412-9616-625672c045f9/",
+          title: "desafio-quatro",
+          description: "Lorem ipsum dolor.",
+          thumbnail: "Lorem ipsum dolor.",
+          level: enum_challenge_difficult.easy,
+          instruction: "Lorem ipsum dolor.",
+          tags: "d, e, f",
+          score: "15",
+          answers: "Lorem ipsum dolor.",
+          startedAt: "2022-09-07 23:59:59",
+          finishAt: "2022-07-09 23:59:59",
+        },
       ],
       {}
     );

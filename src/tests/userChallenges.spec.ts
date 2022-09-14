@@ -95,21 +95,17 @@ describe('No controller de userChallanges ao executar a função', () => {
       expect(expectResponse.body.message).toBe("Data limite para finalizar o desafio ultrapassada");
     });
    });
-  
-    
-
-
-
+     
 
 describe('startChallenge,', () => {
     
-  test('Em caso de sucesso, retornar o status 201', async () => {
-    const expectResponse = await supertest(app).post('/userchallenge/886471b9-00df-4a9d-9138-4fbe703c9569/start')
-    .query({
-      userId: 'db1526a7-907f-4d47-b284-d4186e4c5c98'
-    });
-       expect(expectResponse.status).toBe(201);
-  });
+  // test('Em caso de sucesso, retornar o status 201', async () => {
+  //   const expectResponse = await supertest(app).post('/userchallenge/886471b9-00df-4a9d-9138-4fbe703c9569/start')
+  //   .query({
+  //     userId: 'db1526a7-907f-4d47-b284-d4186e4c5c98'
+  //   });
+  //      expect(expectResponse.status).toBe(201);
+  // });
 
   test('Em caso de erro, retornar o status 400', async () => {
     const expectResponse = await supertest(app).post('/userChallenge/926ad065-6dd1-4add-ad90-91440b97172d/start')
@@ -128,9 +124,9 @@ test('Em caso de erro, retornar o status 400', async () => {
  expect(expectResponse.body.message).toBe("Você ainda não tem permissão para iniciar esse desafio.");
 });
 test('Em caso de erro, retornar o status 400', async () => {
-  const expectResponse = await supertest(app).post('/userChallenge/be9316ba-90de-4860-90a4-d4bb8e1846db/start')
+  const expectResponse = await supertest(app).post('/userChallenge/886471b9-00df-4a9d-9138-4fbe703c9569/start')
  .query({
-   userId: "db1526a7-907f-4d47-b284-d4186e4c5c98"
+   userId: "8857ecdf-c704-40f2-9cbe-f55096f1f331"
   });
  expect(expectResponse.status).toBe(400);
  expect(expectResponse.body.message).toBe("Desafio já foi iniciado");
