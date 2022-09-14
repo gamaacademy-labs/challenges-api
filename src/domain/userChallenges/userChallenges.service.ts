@@ -6,6 +6,15 @@ import UserChallengesModel from "./userChallenges.model";
 import { DateFinishedType, DateVerificationType, UserIdChallengeIdType } from "./userChallenges.types";
 
 const UserChallengesService = {
+  async userChallengeExists(userChallengeId: string) {
+    const userChallengeExists = await UserChallengesModel.count({
+      where: {
+        id: userChallengeId,
+      },
+    });
+    if (!userChallengeExists) throw new Error("ID de desafio do usuário não é válido");
+  },
+
   async getScoresByChallenge(challengeId: string): Promise<UserChallenge[]> {
     await ChallengesService.challengeExists(challengeId);
 
@@ -116,17 +125,16 @@ const UserChallengesService = {
 
   
   async startedDateVerification({
-  challengeId,
-  userId
-}: DateVerificationType): Promise<boolean>{
-const startedAt = await ChallengesService.getStartedAt(challengeId);
-if(!startedAt){
-  throw new Error("Este desafio não tem data de início")
- }
-const startedBefore = isBefore(new Date(), parseJSON(startedAt));
+  challengeId
+  }: DateVerificationType): Promise<boolean>{
+  const startedAt = await ChallengesService.getStartedAt(challengeId);
+  if(!startedAt){
+    throw new Error("Este desafio não tem data de início")
+  }
+  const startedBefore = isBefore(new Date(), parseJSON(startedAt));
 
 
-return startedBefore;
+  return startedBefore;
   },
 
   async endChallenge({ 

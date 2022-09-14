@@ -90,11 +90,14 @@ const UserDeliverablesService = {
   },
 
   async getUserDeliverablesByUserChallengeId(userChallengeId: string): Promise<UserDeliverable[]> {
+    await UserChallengesService.userChallengeExists(userChallengeId);
+
     const userDeliverables = await UserDeliverablesModel.findAll({
       where: {
         userChallengeId,
       }
     });
+
     if (userDeliverables.length == 0) throw new Error("Ainda não há entregas deste usuário para este desafio");
 
     return userDeliverables as unknown as UserDeliverable[];
