@@ -465,7 +465,11 @@
                             "Usuario":
                             {
                                 "description": "Ainda não há entregas deste usuário para este desafio"
-                            }                          
+                            },
+                            "ID-invalido":
+                            {
+                                "description": "ID de desafio do usuário não é válido"
+                            }                      
                         }
                     }
                 }
