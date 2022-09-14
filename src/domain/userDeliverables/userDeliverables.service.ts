@@ -49,7 +49,6 @@ const UserDeliverablesService = {
    
     const userDeliverable = await this.getUserDeliverableById(userDeliverableId);
     const userChallenge = userDeliverable.userChallenges;
-    console.log(userChallenge)
     if (!userChallenge) throw new Error("Desafio não iniciado pelo usuário");
 
     const userChallengeFinished = userChallenge.finishedAt;
@@ -96,7 +95,7 @@ const UserDeliverablesService = {
         userChallengeId,
       }
     });
-    if (!userDeliverables) throw new Error("Ainda não há entregas deste usuário para este desafio");
+    if (userDeliverables.length == 0) throw new Error("Ainda não há entregas deste usuário para este desafio");
 
     return userDeliverables as unknown as UserDeliverable[];
   },
