@@ -30,6 +30,13 @@ export default {
           challengeId: "661d66e4-b36a-49a9-b2af-f5464ef59acb"
         },
         {
+          id: "f77e6b1e-4dd2-4cd4-8067-998c9452b30f",
+          title: "Est dolor",
+          description: "Sed lobortis nibh. Phasellus ultricies scelerisque velit ornare finibus.",
+          averageTime: 35,
+          challengeId: "661d66e4-b36a-49a9-b2af-f5464ef59acb"
+        },
+        {
           id: "f947511f-f8a4-4dc4-ab7d-88b9223037b7",
           title: "Pellentesque",
           description: "Mauris sed condimentum nisl.",
