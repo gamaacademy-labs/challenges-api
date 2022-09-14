@@ -266,9 +266,6 @@
                             {
                                 "description": "Usuário não encontrado"
                             },
-                            "Data-inicio": {
-                                "description": "Este desafio não tem data de início"
-                            },
                             "Desafio-iniciado": {
                                 "description": "Desafio já foi iniciado"
                             },
@@ -316,20 +313,7 @@
                             "Usuario":
                             {
                                 "description": "Usuário não encontrado"
-                            },
-                            "Data-inicio": {
-                                "description": "Este desafio não tem data de início"
-                            },
-                            "Desafio-iniciado": {
-                                "description": "Desafio já foi iniciado"
-                            },
-                            "Data-limite": {
-                                "description": "Data limite para finalizar o desafio ultrapassada"
-                            },                            
-                            "Permissao":
-                            {
-                                "description": "Você ainda não tem permissão para iniciar esse desafio"
-                            }                          
+                            }                     
                         }
                     }
                 }
@@ -391,6 +375,18 @@
                             "Usuario":
                             {
                                 "description": "Usuário não encontrado"
+                            },
+                            "Desafio-nao-iniciado":
+                            {
+                                "description": "Desafio não iniciado pelo usuário"
+                            },
+                            "Desafio-finalizado":
+                            {
+                                "description": "Desafio já finalizado"
+                            },
+                            "Data-limite":
+                            {
+                                "description": "Data limite para finalizar o desafio ultrapassada"
                             }                          
                         }
                     }
@@ -525,7 +521,15 @@
                             "Usuario":
                             {
                                 "description": "Entrega do usuário não encontrada"
-                            }                          
+                            },
+                            "Desafio-finalizado":
+                            {
+                                "description": "Desafio já finalizado"
+                            },
+                            "Data-limite":
+                            {
+                                "description": "Data limite para finalizar o desafio ultrapassada"
+                            }                              
                         }
                     }
                 }

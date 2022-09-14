@@ -119,20 +119,19 @@ const UserChallengesService = {
         userId, 
         dateFinished: finishAt 
       });
+      throw new Error("Data limite para finalizar o desafio ultrapassada");
     }
     return finishedAfter;
   },
 
-  
   async startedDateVerification({
   challengeId
   }: DateVerificationType): Promise<boolean>{
   const startedAt = await ChallengesService.getStartedAt(challengeId);
   if(!startedAt){
-    throw new Error("Este desafio não tem data de início")
+    return false;
   }
   const startedBefore = isBefore(new Date(), parseJSON(startedAt));
-
 
   return startedBefore;
   },
@@ -147,8 +146,15 @@ const UserChallengesService = {
       userId
     });
     if (!userChallenge) throw new Error("Desafio não iniciado pelo usuário");
+    
+    const finishAt = await ChallengesService.getFinishAt(challengeId);
+    const finishedAfter = isAfter(new Date(), parseJSON(finishAt));
+    
+    if (finishedAfter == true) {
+      dateFinished = finishAt;
+    }
 
-    const finishChallenge = await UserChallengesModel.update(
+    await UserChallengesModel.update(
       { 
         finishedAt: dateFinished 
       },
