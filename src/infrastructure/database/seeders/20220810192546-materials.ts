@@ -7,6 +7,12 @@ import ChallengeMaterialsModel from "../../../domain/challengeMaterials/challeng
 export default {
   async up (queryInterface: QueryInterface, Sequelize: Sequelize) {
     await ChallengeMaterialsModel.bulkCreate([{
+      id: "5e760261-4f1b-41b8-b232-d36ce5ffed60",
+      title: "file5",
+      link: "file5.txt",
+      type: enum_material_type.file,
+      challengeId: "be9316ba-90de-4860-90a4-d4bb8e1846db"
+    },{
       id: "7dbd8f91-0271-4f49-81a1-a5d1aba2a829",
       title: "video1",
       link: "www.google.com",

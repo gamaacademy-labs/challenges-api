@@ -10,7 +10,7 @@ export default {
       [
         {
           id: "be9316ba-90de-4860-90a4-d4bb8e1846db",
-          title: "desafio-teste",
+          title: "desafio-um",
           description: "Lorem ipsum dolor sit amet, consectetur.",
           thumbnail: "https://escolauniwork.com.br/wp-content/uploads/2021/09/html-5-logo.pngt",
           level: enum_challenge_difficult.medium,
@@ -31,7 +31,7 @@ export default {
           tags: "a, b, c",
           score: "12",
           answers: "Lorem ipsum dolor sit amet",
-          startedAt: "2022-12-01 23:59:59",
+          startedAt: "2022-09-01 23:59:59",
           finishAt: "2022-10-01 23:59:59",
         },
         {
