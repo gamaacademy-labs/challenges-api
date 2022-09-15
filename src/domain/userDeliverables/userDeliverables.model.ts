@@ -12,7 +12,7 @@ UserDeliverablesModel.init({
         type: DataTypes.STRING(36),
         primaryKey: true,
         allowNull: false,
-        defaultValue: uuidv4()
+        defaultValue: uuidv4
     },
     link: {
         type: DataTypes.STRING,
