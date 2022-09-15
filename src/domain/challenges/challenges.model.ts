@@ -32,7 +32,7 @@ ChallengesModel.init(
       defaultValue: "easy"
     },
     instruction: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     tags: {
