@@ -102,6 +102,16 @@ const UserDeliverablesService = {
 
     return userDeliverables as unknown as UserDeliverable[];
   },
+
+  async getCountUserDeliverables(userChallengeId: string): Promise<number> {
+    const userScore = await UserDeliverablesModel.count({
+      where: {
+        userChallengeId,
+      }
+    });
+    
+    return userScore;
+  },
 };
 
 export default UserDeliverablesService;
