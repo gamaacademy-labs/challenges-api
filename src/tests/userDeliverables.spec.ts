@@ -9,7 +9,7 @@ describe('No controller de UserDeliverables ao executar a função', () => {
     test('Em caso de sucesso, retornar o status 201', async () => {
       const expectResponse = await supertest(app).post('/userdeliverable/13967613-da69-4c55-9fbd-d3d731bfff9a/deliverable')
       .query({
-        userId: '2ee62d21-8957-4004-a3d5-b7f8220354b9'
+        userId: '8857ecdf-c704-40f2-9cbe-f55096f1f331'
       })
       .send({
         link, 
@@ -70,7 +70,7 @@ describe('No controller de UserDeliverables ao executar a função', () => {
     const explanation = 'bla bla';
     
     test('Em caso de sucesso, retornar o status 200', async () => {
-      const expectResponse = await supertest(app).put('/userdeliverable/eaac6341-e1c0-49fa-98cc-7b8da30cbebd/refresh')
+      const expectResponse = await supertest(app).put('/userdeliverable/4834d499-d255-4797-b63f-86904ae42d6e/refresh')
       .send({
         link, 
         explanation
@@ -137,7 +137,7 @@ describe('No controller de UserDeliverables ao executar a função', () => {
     });
 
     test('Caso não haja entregas do usuário para o desafio em questão, mostrar mensagem de erro, com o status 400', async () => {
-      const expectResponse = await supertest(app).get('/userdeliverables/4b382f0e-9a99-45c0-9f4f-d918797c3cf2');
+      const expectResponse = await supertest(app).get('/userdeliverables/9b12fd84-14b4-4b0c-843e-fa1638ea7a61');
       expect(expectResponse.status).toBe(400);
       expect(expectResponse.body.message).toBe("Ainda não há entregas deste usuário para este desafio");
     });

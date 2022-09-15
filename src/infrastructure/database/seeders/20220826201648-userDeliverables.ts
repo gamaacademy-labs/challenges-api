@@ -83,6 +83,13 @@ export default {
           userChallengeId: "5cd13538-090f-4a5a-adad-2554b09e2e58",
           challengeDeliverableId: "58f34daf-0205-433d-9d37-15338b7cc6d1"
         },
+        {
+          id: "4834d499-d255-4797-b63f-86904ae42d6e",
+          link: "www.site99.com.br",
+          explanation: "Curabitur mi tortor, faucibus vitae",
+          userChallengeId: "4b382f0e-9a99-45c0-9f4f-d918797c3cf2",
+          challengeDeliverableId: "13967613-da69-4c55-9fbd-d3d731bfff9a"
+        }
       ],
       {}
     );
