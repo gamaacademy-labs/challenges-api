@@ -22,12 +22,10 @@ const UserDeliverablesService = {
     if (!userChallengeId) throw new Error("Desafio não iniciado pelo usuário");
     if (getUserChallenge.finishedAt) throw new Error("Desafio já finalizado");
 
-    const finishedAfter = await UserChallengesService.finishDateVerification({ 
-      challengeId, 
-      userId,
-    });
+    const finishedAfter = await UserChallengesService.finishDateVerification(challengeId);
 
     if(finishedAfter == true){
+      await UserChallengesService.endExpiredChallenge({ challengeId, userId, dateFinished: new Date().toString() });
       throw new Error("Data limite para finalizar o desafio ultrapassada")
     };
 
@@ -54,12 +52,13 @@ const UserDeliverablesService = {
     const userChallengeFinished = userChallenge.finishedAt;
     if (userChallengeFinished) throw new Error("Desafio já finalizado");
 
-    const finishedAfter = await UserChallengesService.finishDateVerification({ 
-      challengeId: userChallenge.challengeId, 
-      userId: userChallenge.userId,
-    });
+    const userId = userChallenge.userId;
+    const challengeId = userChallenge.challengeId;
+
+    const finishedAfter = await UserChallengesService.finishDateVerification(userChallenge.challengeId);
 
     if(finishedAfter == true){
+      await UserChallengesService.endExpiredChallenge({ challengeId, userId, dateFinished: new Date().toString() });
       throw new Error("Data limite para finalizar o desafio ultrapassada")
     }
 

@@ -52,38 +52,26 @@ const UserChallengesService = {
     if (startedBefore == true){
       throw new Error("Você ainda não tem permissão para iniciar esse desafio.")
     }
-        
-    const challengeStarted = await UserChallengesModel.count({
+
+    const challengeStarted = await UserChallengesModel.findOne({
       where: {
         challengeId,
         userId,
       },
     });
-    if (challengeStarted == 1) throw new Error("Desafio já foi iniciado");
+    if (challengeStarted) return challengeStarted as unknown as UserChallenge;
+
+    const finishedAfter = await this.finishDateVerification(challengeId);
+    
+    if(finishedAfter == true){
+      throw new Error("Você não pode iniciar o desafio.");
+    }
 
     const startingChallenge = await UserChallengesModel.create({
       startedAt: new Date().toString(),
       challengeId,
       userId,
     });
-
-    const finishedAfter = await this.finishDateVerification({ 
-      challengeId, 
-      userId 
-    });
-    
-    if(finishedAfter == true){
-      await UserChallengesModel.update({        
-        startedAt: finishAt 
-      },
-      {
-        where: {
-          challengeId,
-          userId,
-        },
-      })
-      throw new Error("Data limite para finalizar o desafio ultrapassada")
-    }
     
     return startingChallenge as unknown as UserChallenge;
   },
@@ -105,22 +93,20 @@ const UserChallengesService = {
     return userChallenge as unknown as UserChallenge;
   },
 
-  async finishDateVerification({ 
-    challengeId, 
-    userId 
-  }: DateVerificationType): Promise<boolean> {
+  async finishDateVerification(challengeId: string): Promise<boolean> {
     const finishAt = await ChallengesService.getFinishAt(challengeId);
     const finishedAfter = isAfter(new Date(), parseJSON(finishAt));
     
-    if (finishedAfter == true) {
-      this.endChallenge({ 
-        challengeId, 
-        userId, 
-        dateFinished: finishAt 
-      });
-      throw new Error("Data limite para finalizar o desafio ultrapassada");
-    }
     return finishedAfter;
+  },
+
+  async endExpiredChallenge({ challengeId, userId, dateFinished }: DateFinishedType) {
+    this.endChallenge({ 
+      challengeId, 
+      userId, 
+      dateFinished 
+    });
+    throw new Error("Data limite para finalizar o desafio ultrapassada");
   },
 
   async startedDateVerification({
