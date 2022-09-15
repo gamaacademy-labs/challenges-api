@@ -2,7 +2,7 @@ import ChallengeDeliverablesService from "../challengeDeliverables/challengeDeli
 import UserChallengesService from "../userChallenges/userChallenges.service";
 import { UserDeliverable } from "./userDeliverable.entity";
 import UserDeliverablesModel from "./userDeliverables.model";
-import { CreateUserDeliverableType, UpdateUserDeliverableIdType } from "./userDeliverables.types";
+import { CreateUserDeliverableType, UpdateUserDeliverableIdType, UserDeliverableExistsType } from "./userDeliverables.types";
 
 const UserDeliverablesService = {
   async includeUserDeliverable({
@@ -21,6 +21,9 @@ const UserDeliverablesService = {
     const userChallengeId = getUserChallenge.id;
     if (!userChallengeId) throw new Error("Desafio não iniciado pelo usuário");
     if (getUserChallenge.finishedAt) throw new Error("Desafio já finalizado");
+
+    const userDeliverableExists = await this.userDeliverableExists({ challengeDeliverableId, userChallengeId })
+    if(userDeliverableExists) throw new Error("Entrega já realizada. Para atualizar, usar o endpoint de update.")
 
     const finishedAfter = await UserChallengesService.finishDateVerification({ 
       challengeId, 
@@ -112,6 +115,18 @@ const UserDeliverablesService = {
     
     return userScore;
   },
+
+  async userDeliverableExists({challengeDeliverableId, userChallengeId}: UserDeliverableExistsType){
+
+    const userDeliverableExists = await UserDeliverablesModel.count({
+      where: {
+        challengeDeliverableId,
+        userChallengeId
+      },
+    });
+
+    return userDeliverableExists
+  }
 };
 
 export default UserDeliverablesService;
