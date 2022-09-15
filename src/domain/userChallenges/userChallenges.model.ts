@@ -16,7 +16,7 @@ UserChallengesModel.init(
       defaultValue: uuidv4(),
     },
     score: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     startedAt: {

@@ -20,7 +20,7 @@ export default {
         },
         {
           id: "e23857e7-7ffa-4978-97af-5669ff95b665",
-          score: "1",
+          score: 1,
           startedAt: new Date().toString(),
           finishedAt: new Date().toString(),
           challengeId: "661d66e4-b36a-49a9-b2af-f5464ef59acb",
@@ -28,7 +28,7 @@ export default {
         },
         {
           id: "ab65569c-853c-4e3d-afe8-6627fb4c60c9",
-          score: "2",
+          score: 2,
           startedAt: new Date().toString(),
           finishedAt: new Date().toString(),
           challengeId: "661d66e4-b36a-49a9-b2af-f5464ef59acb",
@@ -42,7 +42,7 @@ export default {
         },
         {
           id: "d536ed07-7826-47e2-8a0c-0f69373ad50d",
-          score: "3",
+          score: 3,
           startedAt: new Date().toString(),
           finishedAt: new Date().toString(),
           challengeId: "926ad065-6dd1-4add-ad90-91440b97172d",
@@ -50,7 +50,7 @@ export default {
         },
         {
           id: "5cd13538-090f-4a5a-adad-2554b09e2e58",
-          score: "2",
+          score: 2,
           startedAt: new Date().toString(),
           finishedAt: new Date().toString(),
           challengeId: "926ad065-6dd1-4add-ad90-91440b97172d",
