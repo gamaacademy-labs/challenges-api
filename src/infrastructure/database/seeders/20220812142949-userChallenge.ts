@@ -56,6 +56,12 @@ export default {
           challengeId: "926ad065-6dd1-4add-ad90-91440b97172d",
           userId: "2ee62d21-8957-4004-a3d5-b7f8220354b9",
         },
+        {
+          id: "9b12fd84-14b4-4b0c-843e-fa1638ea7a61",
+          startedAt: new Date().toString(),
+          challengeId: "926ad065-6dd1-4add-ad90-91440b97172d",
+          userId: "8857ecdf-c704-40f2-9cbe-f55096f1f331",
+        },
       ],
       {}
     );
