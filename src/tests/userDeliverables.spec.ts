@@ -51,18 +51,7 @@ describe('No controller de UserDeliverables ao executar a função', () => {
       expect(expectResponse.body.message).toBe("Desafio já finalizado");
     });
 
-    test('Caso a data limite de entrega do desafio já tenha passado, mostrar mensagem de erro, com o status 400', async () => {
-      const expectResponse = await supertest(app).post('/userdeliverable/eca72141-0be4-455f-bbb1-e38c6668af69/deliverable')
-      .query({
-        userId: 'e5663bae-95b9-4a36-a836-2006a3bc0453'
-      })
-      .send({
-        link, 
-        explanation
-      });
-      expect(expectResponse.status).toBe(400);
-      expect(expectResponse.body.message).toBe("Data limite para finalizar o desafio ultrapassada");
-    });
+ 
   });
 
   describe('updateUserDeliverable,', () => {
@@ -98,15 +87,7 @@ describe('No controller de UserDeliverables ao executar a função', () => {
       expect(expectResponse.body.message).toBe("Desafio já finalizado");
     });
 
-    test('Caso a data limite de entrega do desafio já tenha passado, mostrar mensagem de erro, com o status 400', async () => {
-      const expectResponse = await supertest(app).put('/userdeliverable/1fa3139a-c7ca-48fc-8aa8-be63e383a684/refresh')
-      .send({
-        link, 
-        explanation
-      });
-      expect(expectResponse.status).toBe(400);
-      expect(expectResponse.body.message).toBe("Data limite para finalizar o desafio ultrapassada");
-    });
+  
   });
 
   describe('getUserDeliverableById,', () => {

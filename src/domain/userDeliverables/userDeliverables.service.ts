@@ -25,7 +25,7 @@ const UserDeliverablesService = {
     const finishedAfter = await UserChallengesService.finishDateVerification(challengeId);
 
     if(finishedAfter == true){
-      await UserChallengesService.endExpiredChallenge({ challengeId, userId, dateFinished: new Date().toString() });
+     await UserChallengesService.endExpiredChallenge({ challengeId, userId, dateFinished: new Date().toString() });
       throw new Error("Data limite para finalizar o desafio ultrapassada")
     };
 
