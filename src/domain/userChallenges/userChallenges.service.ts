@@ -1,5 +1,6 @@
 import { isAfter, isBefore, parseJSON } from "date-fns";
 import ChallengesService from "../challenges/challenges.service";
+import UserDeliverablesService from "../userDeliverables/userDeliverables.service";
 import UsersService from "../users/users.service";
 import { UserChallenge } from "./userChallenge.entity";
 import UserChallengesModel from "./userChallenges.model";
@@ -42,7 +43,6 @@ const UserChallengesService = {
   }: UserIdChallengeIdType): Promise<UserChallenge> {
     await UsersService.userExists(userId);
     const finishAt = await ChallengesService.getFinishAt(challengeId);
-    const startedAt = await ChallengesService.getStartedAt(challengeId);
 
     const startedBefore = await this.startedDateVerification({
       challengeId,
@@ -62,11 +62,10 @@ const UserChallengesService = {
     if (challengeStarted == 1) throw new Error("Desafio já foi iniciado");
 
     const startingChallenge = await UserChallengesModel.create({
+      startedAt: new Date().toString(),
       challengeId,
       userId,
-      startedAt: new Date().toString(),
     });
-
 
     const finishedAfter = await this.finishDateVerification({ 
       challengeId, 
@@ -119,20 +118,19 @@ const UserChallengesService = {
         userId, 
         dateFinished: finishAt 
       });
+      throw new Error("Data limite para finalizar o desafio ultrapassada");
     }
     return finishedAfter;
   },
 
-  
   async startedDateVerification({
   challengeId
   }: DateVerificationType): Promise<boolean>{
   const startedAt = await ChallengesService.getStartedAt(challengeId);
   if(!startedAt){
-    throw new Error("Este desafio não tem data de início")
+    return false;
   }
   const startedBefore = isBefore(new Date(), parseJSON(startedAt));
-
 
   return startedBefore;
   },
@@ -147,10 +145,24 @@ const UserChallengesService = {
       userId
     });
     if (!userChallenge) throw new Error("Desafio não iniciado pelo usuário");
+    
+    const finishAt = await ChallengesService.getFinishAt(challengeId);
+    const finishedAfter = isAfter(new Date(), parseJSON(finishAt));
+    
+    if (finishedAfter == true) {
+      dateFinished = finishAt;
+    }
 
-    const finishChallenge = await UserChallengesModel.update(
+    const userChallengeId = userChallenge.id;
+
+    if (!userChallengeId) throw new Error ("Desafio do usuário não encontrado")
+
+    const score = await UserDeliverablesService.getCountUserDeliverables(userChallengeId);
+
+    await UserChallengesModel.update(
       { 
-        finishedAt: dateFinished 
+        finishedAt: dateFinished,
+        score,
       },
       {
         where: {
