@@ -10,3 +10,9 @@ export interface UpdateUserDeliverableIdType {
   link: string
   explanation: string
 }
+
+export interface UserDeliverableExistsType {
+  challengeDeliverableId: string
+  userChallengeId: string
+
+}
