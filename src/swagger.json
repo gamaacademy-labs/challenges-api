@@ -14,13 +14,13 @@
     "paths": {
         "/users/{userId}": {
             "get": {
-                "summary": "Exibir usuário através da busca pelo nome",
+                "summary": "Exibir usuário através da busca pelo id",
                 "tags": ["Users"],
                 "parameters": [
                     {
                         "name": "userId",
                         "in": "path",
-                        "description": "Nome do usuário",
+                        "description": "Id do usuário",
                         "required": true
                     }
                 ],
@@ -74,9 +74,7 @@
                                 "description": "Não há desafios cadastrados"
                             }                          
                         }
-                    }
-                    
-                    
+                    }  
                 }
             }
         },
@@ -106,7 +104,13 @@
                         }
                     },
                     "400":{
-                        "description": "Desafio não encontrado"
+                        "description": "Bad request",
+                        "headers": {
+                            "Usuario":
+                            {
+                                "description": "Desafio não encontrado"
+                            }                          
+                        }
                     }
                 }
             }
@@ -136,8 +140,14 @@
 
                         }
                     },
-                    "400": {
-                        "description": "Desafio não encontrado"
+                    "400":{
+                        "description": "Bad request",
+                        "headers": {
+                            "Usuario":
+                            {
+                                "description": "Desafio não encontrado"
+                            }                          
+                        }
                     }
                 }
             }
@@ -167,8 +177,14 @@
 
                         }
                     },
-                    "400": {
-                        "description": "Desafio não encontrado"
+                    "400":{
+                        "description": "Bad request",
+                        "headers": {
+                            "Usuario":
+                            {
+                                "description": "Desafio não encontrado"
+                            }                          
+                        }
                     }
                 }
             }
@@ -255,7 +271,7 @@
 
                         }
                     },
-                    "400":{
+                    "400": {
                         "description": "Bad Request",
                         "headers": {
                             "Desafio": 
@@ -266,11 +282,9 @@
                             {
                                 "description": "Usuário não encontrado"
                             },
-                            "Desafio-iniciado": {
-                                "description": "Desafio já foi iniciado"
-                            },
-                            "Data-limite": {
-                                "description": "Data limite para finalizar o desafio ultrapassada"
+                            "Data-limite":
+                            {
+                                "description": "Você não pode iniciar o desafio"
                             },                            
                             "Permissao":
                             {
@@ -313,7 +327,15 @@
                             "Usuario":
                             {
                                 "description": "Usuário não encontrado"
-                            }                     
+                            },
+                            "Nao-iniciado":
+                            {
+                                "description": "Desafio não iniciado pelo usuário"
+                            },
+                            "Desafio-usuario":
+                            {
+                                "description": "Desafio do usuário não encontrado"
+                            }                       
                         }
                     }
                 }
@@ -462,9 +484,9 @@
                             {
                                 "description": "Ainda não há entregas deste usuário para este desafio"
                             },
-                            "ID-invalido":
+                            "Id-invalido":
                             {
-                                "description": "ID de desafio do usuário não é válido"
+                                "description": "Id de desafio do usuário não é válido"
                             }                      
                         }
                     }
@@ -529,7 +551,11 @@
                             "Data-limite":
                             {
                                 "description": "Data limite para finalizar o desafio ultrapassada"
-                            }                              
+                            },
+                            "Nao-iniciado":
+                            {
+                                "description": "Desafio não iniciado pelo usuário"
+                            }                               
                         }
                     }
                 }
