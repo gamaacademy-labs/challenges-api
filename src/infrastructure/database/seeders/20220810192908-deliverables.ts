@@ -63,6 +63,20 @@ export default {
           description: "Aenean et ornare augue, sit amet sagittis nisi.",
           averageTime: 15,
           challengeId: "886471b9-00df-4a9d-9138-4fbe703c9569"
+        },
+        {
+          id: "e8abcbdf-49d1-42c5-85c0-60f8b870ab03",
+          title: "Venenatis magna",
+          description: "Aenean it amet sagittis nisi.",
+          averageTime: 25,
+          challengeId: "86d17248-3388-4412-9616-625672c045f9"
+        },
+        {
+          id: "678abe27-85d2-45fc-8d26-8d1b00568e82",
+          title: "Venenatis magna",
+          description: "Ornare augue, sit amet sagittis.",
+          averageTime: 35,
+          challengeId: "78382a91-5583-45a0-b0e8-f1620918aa50"
         }
       ],
       {}
