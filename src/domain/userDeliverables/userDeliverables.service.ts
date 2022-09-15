@@ -2,7 +2,7 @@ import ChallengeDeliverablesService from "../challengeDeliverables/challengeDeli
 import UserChallengesService from "../userChallenges/userChallenges.service";
 import { UserDeliverable } from "./userDeliverable.entity";
 import UserDeliverablesModel from "./userDeliverables.model";
-import { CreateUserDeliverableType, UpdateUserDeliverableIdType } from "./userDeliverables.types";
+import { CreateUserDeliverableType, UpdateUserDeliverableIdType, UserDeliverableExistsType } from "./userDeliverables.types";
 
 const UserDeliverablesService = {
   async includeUserDeliverable({
@@ -111,6 +111,18 @@ const UserDeliverablesService = {
     
     return userScore;
   },
+
+  async userDeliverableExists({challengeDeliverableId, userChallengeId}: UserDeliverableExistsType){
+
+    const userDeliverableExists = await UserDeliverablesModel.count({
+      where: {
+        challengeDeliverableId,
+        userChallengeId
+      },
+    });
+
+    return userDeliverableExists
+  }
 };
 
 export default UserDeliverablesService;
