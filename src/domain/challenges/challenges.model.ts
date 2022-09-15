@@ -40,7 +40,7 @@ ChallengesModel.init(
       allowNull: false
     },
     score: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     answers: {
