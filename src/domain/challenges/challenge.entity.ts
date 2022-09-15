@@ -14,7 +14,7 @@ export interface Challenge {
   level: enum_challenge_difficult
   instruction: string
   tags: string
-  score: string
+  score: number
   answers: string
   startedAt?: string
   finishAt: string
