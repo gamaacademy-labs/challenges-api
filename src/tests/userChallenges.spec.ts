@@ -1,7 +1,7 @@
 import supertest from 'supertest';
 import app from '../config/server';
 
-describe('No controller de userChallnges ao executar a função', () => {
+describe('No controller de userChallenges ao executar a função', () => {
     describe('getScoresByChallenge,', () => {
 
       test('Em caso de sucesso, retornar o status 200', async () => {
@@ -86,6 +86,7 @@ describe('No controller de userChallnges ao executar a função', () => {
      expect(expectResponse.status).toBe(400);
      expect(expectResponse.body.message).toBe("Usuário não encontrado");
     });
+
   //   test('Caso a data limite de entrega do desafio já tenha passado, mostrar mensagem de erro, com o status 400', async () => {
   //     const expectResponse = await supertest(app).post('/userChallenge/be9316ba-90de-4860-90a4-d4bb8e1846db/end')
   //     .query({
@@ -134,7 +135,6 @@ test('Em caso de erro, retornar o status 400', async () => {
  expect(expectResponse.body.message).toBe("Desafio já foi iniciado");
 });
 
-
 test('Em caso de erro, retornar o status 400', async () => {
   const expectResponse = await supertest(app).post('/userChallenge/e36a96cc-89b1-446b-acfb-eed68c0a261a/start')
  .query({
@@ -143,7 +143,6 @@ test('Em caso de erro, retornar o status 400', async () => {
  expect(expectResponse.status).toBe(400);
  expect(expectResponse.body.message).toBe("Desafio não encontrado");
 });
-
 
 test('Em caso de erro, retornar o status 400', async () => {
   const expectResponse = await supertest(app).post('/userChallenge/be9316ba-90de-4860-90a4-d4bb8e1846db/start')
@@ -154,6 +153,5 @@ test('Em caso de erro, retornar o status 400', async () => {
  expect(expectResponse.body.message).toBe("Usuário não encontrado");
 });
 
-
-
 })
+

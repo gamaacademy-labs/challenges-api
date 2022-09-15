@@ -2,7 +2,7 @@ import ChallengeDeliverablesService from "../challengeDeliverables/challengeDeli
 import UserChallengesService from "../userChallenges/userChallenges.service";
 import { UserDeliverable } from "./userDeliverable.entity";
 import UserDeliverablesModel from "./userDeliverables.model";
-import { CreateUserDeliverableType, UpdateUserDeliverableIdType } from "./userDeliverables.types";
+import { CreateUserDeliverableType, UpdateUserDeliverableIdType, UserDeliverableExistsType } from "./userDeliverables.types";
 
 const UserDeliverablesService = {
   async includeUserDeliverable({
@@ -22,12 +22,10 @@ const UserDeliverablesService = {
     if (!userChallengeId) throw new Error("Desafio não iniciado pelo usuário");
     if (getUserChallenge.finishedAt) throw new Error("Desafio já finalizado");
 
-    const finishedAfter = await UserChallengesService.finishDateVerification({ 
-      challengeId, 
-      userId,
-    });
+    const finishedAfter = await UserChallengesService.finishDateVerification(challengeId);
 
     if(finishedAfter == true){
+      await UserChallengesService.endExpiredChallenge({ challengeId, userId, dateFinished: new Date().toString() });
       throw new Error("Data limite para finalizar o desafio ultrapassada")
     };
 
@@ -49,18 +47,18 @@ const UserDeliverablesService = {
    
     const userDeliverable = await this.getUserDeliverableById(userDeliverableId);
     const userChallenge = userDeliverable.userChallenges;
-    console.log(userChallenge)
     if (!userChallenge) throw new Error("Desafio não iniciado pelo usuário");
 
     const userChallengeFinished = userChallenge.finishedAt;
     if (userChallengeFinished) throw new Error("Desafio já finalizado");
 
-    const finishedAfter = await UserChallengesService.finishDateVerification({ 
-      challengeId: userChallenge.challengeId, 
-      userId: userChallenge.userId,
-    });
+    const userId = userChallenge.userId;
+    const challengeId = userChallenge.challengeId;
+
+    const finishedAfter = await UserChallengesService.finishDateVerification(userChallenge.challengeId);
 
     if(finishedAfter == true){
+      await UserChallengesService.endExpiredChallenge({ challengeId, userId, dateFinished: new Date().toString() });
       throw new Error("Data limite para finalizar o desafio ultrapassada")
     }
 
@@ -91,15 +89,40 @@ const UserDeliverablesService = {
   },
 
   async getUserDeliverablesByUserChallengeId(userChallengeId: string): Promise<UserDeliverable[]> {
+    await UserChallengesService.userChallengeExists(userChallengeId);
+
     const userDeliverables = await UserDeliverablesModel.findAll({
       where: {
         userChallengeId,
       }
     });
-    if (!userDeliverables) throw new Error("Ainda não há entregas deste usuário para este desafio");
+
+    if (userDeliverables.length == 0) throw new Error("Ainda não há entregas deste usuário para este desafio");
 
     return userDeliverables as unknown as UserDeliverable[];
   },
+
+  async getCountUserDeliverables(userChallengeId: string): Promise<number> {
+    const userScore = await UserDeliverablesModel.count({
+      where: {
+        userChallengeId,
+      }
+    });
+    
+    return userScore;
+  },
+
+  async userDeliverableExists({challengeDeliverableId, userChallengeId}: UserDeliverableExistsType){
+
+    const userDeliverableExists = await UserDeliverablesModel.count({
+      where: {
+        challengeDeliverableId,
+        userChallengeId
+      },
+    });
+
+    return userDeliverableExists
+  }
 };
 
 export default UserDeliverablesService;

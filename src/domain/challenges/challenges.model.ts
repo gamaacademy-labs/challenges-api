@@ -12,7 +12,7 @@ ChallengesModel.init(
       type: DataTypes.STRING(36),
       primaryKey: true,
       allowNull: false,
-      defaultValue: uuidv4()
+      defaultValue: uuidv4
     },
     title: {
       type: DataTypes.STRING,
@@ -40,7 +40,7 @@ ChallengesModel.init(
       allowNull: false
     },
     score: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     answers: {
