@@ -63,7 +63,7 @@ export default {
           id: "86d17248-3388-4412-9616-625672c045f9/",
           title: "desafio-quatro",
           description: "Lorem ipsum dolor.",
-          thumbnail: "Lorem ipsum dolor.",
+          thumbnail: "https://miro.medium.com/max/1000/0*hXm4rb8UAf5DEhZ2.png",
           level: enum_challenge_difficult.easy,
           instruction: "Lorem ipsum dolor.",
           tags: "d, e, f",
